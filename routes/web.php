@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatRoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
+
+Route::get('setchatroom', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+
+Route::get('chatroom/{room}', [ChatRoomController::class, 'chatRoom'])->name('chat-room');
