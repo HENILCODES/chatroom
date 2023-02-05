@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
 
-Route::get('setchatroom', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
 
-Route::get('chatroom/{room}', [ChatRoomController::class, 'chatRoom'])->name('chat-room');
+Route::post('send',[ChatRoomController::class,'sendChat'])->name('send-chat');
+

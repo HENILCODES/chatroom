@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigInteger('id')->primary();
-            $table->string('chat');
+            $table->text('chat');
+            $table->integer('rooms_id')->index();
             $table->integer('users_id')->index();
             $table->timestamps();
         });
