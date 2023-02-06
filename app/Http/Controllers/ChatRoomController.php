@@ -17,15 +17,18 @@ class ChatRoomController extends Controller
 
     function setChatRoom(Request $request)
     {
-        $room = Room::where('name', [$request['room']])->first();
-
-        $chat = Message::where('rooms_id', $room->id)->get();
-        // dd($chat);
-        return view('room.chat-room', compact('chat'));
+        $room_id = Room::where('name', [$request['room']])->first()->id;
+        return view('room.chat-room', compact('room_id'));
     }
-    function sendChat(Request $request){
-        $message =$request->except('_token');
+    function sendChat(Request $request)
+    {
+        $message = $request->all();
         Message::create($message);
-        return redirect()->back();
+        return "Send";
+    }
+    function getChat(Request $request)
+    {
+        $chat = Message::where('rooms_id', $request->room_id)->get();
+        return $chat;
     }
 }
