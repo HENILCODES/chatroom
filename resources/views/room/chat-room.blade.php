@@ -8,9 +8,9 @@
             </div>
             <div class="">
                 <div class="overflow-y-auto px-5 pt-3" style="height: 350px" id="chat-box">
-                    @foreach ($chat as $item)
+                    {{-- @foreach ($chat as $item)
                         {{ $item }}
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
             <div class="">
@@ -30,45 +30,10 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            getData();
-            function getData() {
-                $.ajax("http://127.0.0.1:8000/get", {
-                    type: 'POST',
-                    data: {
-                        _token: 'ijFX6Kk6ekkSoIMnV89MRVKc0tpKez4buKqz19Sh',
-                        room_name: {{ $room_name }},
-                    },
-                    success: function(data, status, xhr) {
-                        // data.forEach(element => {
-                        //     $('#chat-box').append(`<div class="bg-info my-3" style="width: 200px;">${element['id']} <span>${element['users_id']}</span><br> <span>${element['chat']}</span><br> <span>${element['created_at']}</span> </div>`);
-                        // });
-                        console.log(data);
-                    },
-                    error: function(jqXhr, textStatus, errorMessage) {
-                        console.log('Error' + errorMessage);
-                    }
-                });
-            }
-            $('#send').click(function() {
-                let chat = $('#chat').val();
-                let users_id = 1;
-                $.ajax('{{ route('send-chat') }}', {
-                    type: 'POST',
-                    data: {
-                        chat: chat,
-                        _token: 'ijFX6Kk6ekkSoIMnV89MRVKc0tpKez4buKqz19Sh',
-                        rooms_name: {{ $room_name }},
-                        users_id: users_id
-                    },
-                    success: function(data, status, xhr) {
-                        getData();
-                    },
-                    error: function(jqXhr, textStatus, errorMessage) {
-                        console.log('Error' + errorMessage);
-                    }
-                });
-            })
-        });
+        var room_name = "<?php echo $room_name; ?>";
+        var token = $("input[name='_token']").val();
+        var chat= $('#chat').val();
+        var users_id= 1;
     </script>
+    <script src="/js/script.js"></script>
 @endsection

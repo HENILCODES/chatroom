@@ -18,7 +18,8 @@ class ChatRoomController extends Controller
     function setChatRoom(Request $request)
     {
         $room_name =$request['room'];
-        return view('room.chat-room', compact('room_name','chat'));
+        // dd($room_name);
+        return view('room.chat-room', compact('room_name'));
     }
     function sendChat(Request $request)
     {
