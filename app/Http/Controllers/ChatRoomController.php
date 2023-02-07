@@ -17,18 +17,17 @@ class ChatRoomController extends Controller
 
     function setChatRoom(Request $request)
     {
-        $room_id = Room::where('name', [$request['room']])->first()->id;
-        return view('room.chat-room', compact('room_id'));
+        $room_name =$request['room'];
+        return view('room.chat-room', compact('room_name','chat'));
     }
     function sendChat(Request $request)
     {
         $message = $request->all();
         Message::create($message);
-        return "Send";
+        return redirect()->back();
     }
-    function getChat(Request $request)
-    {
-        $chat = Message::where('rooms_id', $request->room_id)->get();
+    function getChat(Request $request){
+        $chat = Message::where('rooms_name', $request->room_name)->get();
         return $chat;
     }
 }

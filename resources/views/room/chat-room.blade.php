@@ -8,38 +8,42 @@
             </div>
             <div class="">
                 <div class="overflow-y-auto px-5 pt-3" style="height: 350px" id="chat-box">
+                    @foreach ($chat as $item)
+                        {{ $item }}
+                    @endforeach
                 </div>
             </div>
             <div class="">
-                <div class="row m-auto shadow g-3 ">
+                <form method="post" action="{{ route('send-chat') }}" class="row m-auto shadow g-3 ">
                     @csrf
+                    <input type="hidden" name="rooms_name" value="{{ $room_name }}">
+                    <input type="hidden" name="users_id" value="1">
                     <div class="col-8 shadow">
                         <input type="text" id="chat" autocomplete="off" id="chat" required name="chat"
                             class="form-control">
                     </div>
                     <div class="col-4 shadow-lg">
-                        <button class="btn btn-primary" id="send">Send</button>
+                        <button type="submit" class="btn btn-primary" id="send">Send</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function() {
-            var rooms_id = {{ $room_id }};
             getData();
-
             function getData() {
-                $.ajax('{{ route('get-chat') }}', {
+                $.ajax("http://127.0.0.1:8000/get", {
                     type: 'POST',
                     data: {
                         _token: 'ijFX6Kk6ekkSoIMnV89MRVKc0tpKez4buKqz19Sh',
-                        room_id: rooms_id,
+                        room_name: {{ $room_name }},
                     },
                     success: function(data, status, xhr) {
-                        data.forEach(element => {
-                            $('#chat-box').append(`<div class="bg-info my-3" style="width: 200px;">${element['id']} <span>${element['users_id']}</span><br> <span>${element['chat']}</span><br> <span>${element['created_at']}</span> </div>`);
-                        });
+                        // data.forEach(element => {
+                        //     $('#chat-box').append(`<div class="bg-info my-3" style="width: 200px;">${element['id']} <span>${element['users_id']}</span><br> <span>${element['chat']}</span><br> <span>${element['created_at']}</span> </div>`);
+                        // });
+                        console.log(data);
                     },
                     error: function(jqXhr, textStatus, errorMessage) {
                         console.log('Error' + errorMessage);
@@ -54,7 +58,7 @@
                     data: {
                         chat: chat,
                         _token: 'ijFX6Kk6ekkSoIMnV89MRVKc0tpKez4buKqz19Sh',
-                        rooms_id: rooms_id,
+                        rooms_name: {{ $room_name }},
                         users_id: users_id
                     },
                     success: function(data, status, xhr) {

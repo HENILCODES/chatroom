@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top position-sticky top-0 shadow navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand fs-3 fw-bold">Check</span>
+            <a href="/" class="navbar-brand fs-3 fw-bold">Chat Room</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
