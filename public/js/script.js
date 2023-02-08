@@ -1,6 +1,5 @@
 $(document).ready(function () {
     getData();
-
     $("#chat").on("keyup", function (element) {
         if (element.which == 13) {
             $("#send").click();
@@ -30,6 +29,8 @@ $(document).ready(function () {
         });
     }
     function sendData() {
+        var chat = $("#chat").val();
+        
         $.ajax("http://127.0.0.1:8000/send", {
             type: "POST",
             data: {

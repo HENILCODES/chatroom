@@ -29,7 +29,6 @@
     <script>
         var room_name = "<?php echo $room_name; ?>";
         var token = $("input[name='_token']").val();
-        var chat= $('#chat').val();
         var users_id= 1;
     </script>
     <script src="/js/script.js"></script>
