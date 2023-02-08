@@ -13,4 +13,8 @@ class Message extends Model
         'rooms_name',
         'users_id',
     ];
+
+    public function getCreatedAtAttribute($value){
+        return date('d-M-Y h:i:s a',strtotime($value));
+    }
 }

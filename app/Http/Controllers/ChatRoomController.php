@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChatRoomRequest;
 use App\Models\Message;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 class ChatRoomController extends Controller
 {
-    public function createRoom(Request $request)
+    public function createRoom(ChatRoomRequest $request)
     {
         $room = $request->all();
         Room::create($room);
@@ -18,15 +19,15 @@ class ChatRoomController extends Controller
     function setChatRoom(Request $request)
     {
         $room_name =$request['room'];
-        // dd($room_name);
         return view('room.chat-room', compact('room_name'));
     }
     function sendChat(Request $request)
     {
         $message = $request->all();
         Message::create($message);
-        return redirect()->back();
+        return $message;
     }
+    
     function getChat(Request $request){
         $chat = Message::where('rooms_name', $request->room_name)->get();
         return $chat;
