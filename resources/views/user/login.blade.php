@@ -20,10 +20,11 @@
                 </div>
             </div>
             <div class="infor">
-                <form autocomplete="off" action="{{ route('user.store') }}" method="post">
+                <form autocomplete="off" action="{{ route('user-check') }}" method="post">
+                    @csrf
                     <div class="input_box">
-                        <span class="TagIn">Email Address </span>
-                        <input type="email" name="email" class="input" placeholder="type username" id="email"
+                        <label class="TagIn" for="email">Email Address </label>
+                        <input type="email" name="email" class="input" placeholder="type email" id="email"
                             required title="Email Address">
                     </div>
                     <div class="input_box">
@@ -34,7 +35,7 @@
                             <span class="bi bi-eye-fill" id="show_hide_password"></span>
                         </div>
                     </div>
-                    <button class="Log_Button" type="submit" id="login" name="U_Login">Log in</button>
+                    <button class="Log_Button" type="submit" id="login">Log in</button>
                 </form>
             </div>
             <div class="or">
@@ -43,7 +44,7 @@
                 <div class="desd"></div>
             </div>
             <div class="box1_bottm">
-                <span class="crea">Don't have an account?</span> <a href="{{ route('user.create') }}" class="sign_up">
+                <span class="crea">Don't have an account?</span> <a href="{{ route('user-signup') }}" class="sign_up">
                     Sign up</a>
             </div>
         </div>

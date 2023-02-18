@@ -23,7 +23,7 @@
             </button>
             <div class="collapse navbar-collapse my-2" id="navbarSupportedContent">
                 <div class="ms-auto ps-3">
-                    <a href="{{route('user.create')}}" class="fs-2 text-decoration-none text-black me-3"> Log in </a>
+                    <a href="{{route('user-signup')}}" class="fs-2 text-decoration-none text-black me-3"> Sign up </a>
                 </div>
             </div>
         </div>

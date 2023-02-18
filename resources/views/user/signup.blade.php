@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="infor">
-                <form autocomplete="off" action="{{route('user.store')}}" method="post">
+                <form autocomplete="off" action="{{route('user-store')}}" method="post">
                     @csrf
                     <div class="input_box">
                         <span class="TagIn">User name</span>
@@ -47,7 +47,7 @@
                 <div class="desd"></div>
             </div>
             <div class="box1_bottm">
-                <span class="crea">Have an account?</span> <a href="Form_login.php" class="sign_up"> Log In</a>
+                <span class="crea">Have an account?</span> <a href="" class="sign_up"> Log In</a>
             </div>
         </div>
         <div class="Footer">

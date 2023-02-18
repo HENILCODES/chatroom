@@ -1,13 +1,10 @@
 $(document).ready(function () {
-// setInterval(function () {
-    // },1000);
     getData();
     $("#chat").on("keyup", function (element) {
         if (element.which == 13) {
             $("#send").click();
         }
     });
-        100;
     $("#send").click(function () {
         sendData();
     });
@@ -33,22 +30,23 @@ $(document).ready(function () {
     }
     function sendData() {
         var chat = $("#chat").val();
-
-        $.ajax("http://127.0.0.1:8000/send", {
-            type: "POST",
-            data: {
-                _token: token,
-                chat: chat,
-                rooms_name: room_name,
-                users_id: 1,
-            },
-            success: function () {
+        if (chat.trim().length > 0) {
+            $.ajax("http://127.0.0.1:8000/send", {
+                type: "POST",
+                data: {
+                    _token: token,
+                    chat: chat,
+                    rooms_name: room_name,
+                    users_id: 1,
+                },
+                success: function () {
                     getData();
-                $("#chat").val("");
-            },
-            error: function (jqXhr, textStatus, errorMessage) {
-                console.log("Error :" + errorMessage);
-            },
-        });
+                    $("#chat").val("");
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    console.log("Error :" + errorMessage);
+                },
+            });
+        }
     }
 });

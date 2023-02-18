@@ -18,14 +18,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('user')->group(function () {
+    
+    Route::controller(UserController::class)->group(function () {
+        
+        Route::get('login', 'login')->name('user-login');
+        Route::get('signup', 'signup')->name('user-signup');
 
-Route::resource('user', UserController::class);
+        Route::post('store', 'store')->name('user-store');
+        Route::post('check', 'check')->name('user-check');
+    });
+});
+
 
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
 Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 
 Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
 
-Route::post('send',[ChatRoomController::class,'sendChat'])->name('send-chat');
-Route::post('get',[ChatRoomController::class,'getChat'])->name('get-chat');
-
+Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
+Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
