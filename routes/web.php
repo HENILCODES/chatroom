@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::resource('user', UserController::class);
 
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
+Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 
 Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
 

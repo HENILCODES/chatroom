@@ -16,10 +16,20 @@ class ChatRoomController extends Controller
         return redirect()->route('set-chat-room', ['room' => $room['name']]);
     }
 
+    public function joinRoom(Request $request)
+    {
+        $room = $request->all();
+        return redirect()->route('set-chat-room', ['room' => $room['name']]);
+    }
+
     function setChatRoom(Request $request)
     {
-        $room_name =$request['room'];
-        return view('room.chat-room', compact('room_name'));
+        $room_name = $request['room'];
+        if (Room::where('name', $room_name)->count() == 1) {
+            return view('room.chat-room', compact('room_name'));
+        } else {
+            return redirect()->back();
+        }
     }
     function sendChat(Request $request)
     {
@@ -27,8 +37,9 @@ class ChatRoomController extends Controller
         Message::create($message);
         return $message;
     }
-    
-    function getChat(Request $request){
+
+    function getChat(Request $request)
+    {
         $chat = Message::where('rooms_name', $request->room_name)->get();
         return $chat;
     }
