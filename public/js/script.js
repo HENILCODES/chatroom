@@ -19,7 +19,7 @@ $(document).ready(function () {
                 $("#msger-chat").empty();
                 data.forEach((element) => {
                     $("#msger-chat").append(
-                        `<div class="msg ${element['users_id']==1?'left-msg':'right-msg'}"> <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">${element['users_id']}</div> <div class="msg-info-time">${element['created_at']}</div> </div> <div class="msg-text"> ${element['chat']} </div> </div> </div>`
+                        `<div class="msg ${element['users_id']==users_id?'right-msg':'left-msg'}"> <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">${element['users_id']}</div> <div class="msg-info-time">${element['created_at']}</div> </div> <div class="msg-text"> ${element['chat']} </div> </div> </div>`
                     );
                 });
                 console.log(data);
