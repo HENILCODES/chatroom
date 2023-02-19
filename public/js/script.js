@@ -16,11 +16,11 @@ $(document).ready(function () {
                 room_name: room_name,
             },
             success: function (data) {
-                $("#chat-box").empty();
+                $("#msger-chat").empty();
                 data.forEach((element) => {
-                    $("#chat-box").append(
-                        `<div class="bg-info my-3" style="width: 200px;"><span>${element["users_id"]}</span><br> <span>${element["chat"]}</span><br> <span>${element["created_at"]}</span> </div>`
-                    );
+                    $("#msger-chat").append(
+                        '<div class="msg left-msg"> <div class="msg-img fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">BOT</div> <div class="msg-info-time">12:45</div> </div> <div class="msg-text"> Hi, welcome to SimpleChat! Go ahead and send me a message. 😄 </div> </div> </div>'
+                     );
                 });
             },
             error: function (jqXhr, textStatus, errorMessage) {
