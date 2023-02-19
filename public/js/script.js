@@ -19,9 +19,10 @@ $(document).ready(function () {
                 $("#msger-chat").empty();
                 data.forEach((element) => {
                     $("#msger-chat").append(
-                        '<div class="msg left-msg"> <div class="msg-img fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">BOT</div> <div class="msg-info-time">12:45</div> </div> <div class="msg-text"> Hi, welcome to SimpleChat! Go ahead and send me a message. 😄 </div> </div> </div>'
-                     );
+                        `<div class="msg ${element['users_id']==1?'left-msg':'right-msg'}"> <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">${element['users_id']}</div> <div class="msg-info-time">${element['created_at']}</div> </div> <div class="msg-text"> ${element['chat']} </div> </div> </div>`
+                    );
                 });
+                console.log(data);
             },
             error: function (jqXhr, textStatus, errorMessage) {
                 console.log("Error" + errorMessage);
@@ -37,7 +38,7 @@ $(document).ready(function () {
                     _token: token,
                     chat: chat,
                     rooms_name: room_name,
-                    users_id: 1,
+                    users_id: users_id,
                 },
                 success: function () {
                     getData();
