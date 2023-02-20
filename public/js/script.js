@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    // setInterval(function(){
-    // },1000);
+    $("#option-icon").click(function () {
+        $("#option-chat").slideToggle();
+    });
     getData();
     $("#chat").on("keyup", function (element) {
         if (element.which == 13) {
@@ -19,10 +20,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 var $target = $("#msger-chat");
-                $target.animate(
-                    { scrollTop: $target.height() * $target.height() },
-                    10000
-                );
+                $target.animate({ scrollTop: $target.height() * 8 }, 3000);
                 $("#msger-chat").empty();
                 data.forEach((element) => {
                     $("#msger-chat").append(
