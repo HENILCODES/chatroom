@@ -5,10 +5,13 @@
         <section class="msger">
             <header class="msger-header">
                 <div class="msger-header-title fs-4 fw-bold">
-                    <i class="fas fa-comment-alt"></i> {{ $room_name }}
+                    <i class="fas fa-comment-alt"></i> <i class="bi bi-chat-square-fill"></i> {{ $room_name }}
                 </div>
                 <div class="msger-header-options">
-                    <span><i class="fas fa-cog"></i></span>
+                    <span class="p-2">
+                        <i class="fs-4 mt-2 fa-solid fa-ellipsis-vertical"></i>
+                    </span>
+                    {{-- <span><i class="fas fa-cog"></i></span> --}}
                 </div>
             </header>
             <main class="msger-chat" id="msger-chat">
