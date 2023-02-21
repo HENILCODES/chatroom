@@ -1,17 +1,18 @@
 $(document).ready(function () {
+    getMessage();
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
     });
-    getData();
+    getMessage();
     $("#chat").on("keyup", function (element) {
         if (element.which == 13) {
             $("#send").click();
         }
     });
     $("#send").click(function () {
-        sendData();
+        sendMessage();
     });
-    function getData() {
+    function getMessage() {
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",
             data: {
@@ -20,16 +21,32 @@ $(document).ready(function () {
             },
             success: function (data) {
                 var $target = $("#msger-chat");
-                $target.animate({ scrollTop: $target.height() * 8 }, 3000);
-                $("#msger-chat").empty();
-                Display_Chat(data);
+                $target.animate({ scrollTop: $target.height() * 15 }, 3000);
+                // $("#msger-chat").empty();
+                displayMessage(data);
             },
             error: function (jqXhr, textStatus, errorMessage) {
                 console.log("Error" + errorMessage);
             },
         });
     }
-    function Display_Chat(data) {
+    function getNewMessage() {
+        $.ajax("http://127.0.0.1:8000/getnewchat", {
+            type: "POST",
+            data: {
+                _token: token,
+                room_name: room_name,
+                last_chat_id: 250,
+            },
+            success: function (data) {
+                displayMessage(data);
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                console.log("Error" + errorMessage);
+            },
+        });
+    }
+    function displayMessage(data) {
         data.forEach((element) => {
             $("#msger-chat").append(
                 `<div class="msg ${
@@ -44,7 +61,7 @@ $(document).ready(function () {
             );
         });
     }
-    function sendData() {
+    function sendMessage() {
         var chat = $("#chat").val();
         if (chat.trim().length > 0) {
             $.ajax("http://127.0.0.1:8000/send", {
@@ -56,7 +73,7 @@ $(document).ready(function () {
                     users_id: users_id,
                 },
                 success: function () {
-                    getData();
+                    getNewMessage();
                     $("#chat").val("");
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
