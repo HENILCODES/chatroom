@@ -43,4 +43,21 @@ class ChatRoomController extends Controller
         $chat = Message::where('rooms_name', $request->room_name)->get();
         return $chat;
     }
+    function temp()
+    {
+        // $find = Message::where('id', 148)->get();
+        // $chat = Message::where('rooms_name', 'college')->latest('id')->first();
+        // dd($chat->get());
+        // dd($chat->latest('id')->first());
+        $past_id = 2;
+        if ($past_id) {
+            $chat = Message::where('rooms_name', 'college')->where('id', '>', $past_id);
+            // $response = array('all' => $chat->get(), 'last_recored_id' => $chat->latest('id')->first()->id);
+            // dd($response);
+        } else {
+            $chat = Message::where('rooms_name', 'college');
+        }
+        $response = array('all' => $chat->get(), 'last_recored_id' => $chat->latest('id')->first()->id);
+        dd($response);
+    }
 }

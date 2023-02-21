@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix('user')->group(function () {
-    
+
     Route::controller(UserController::class)->group(function () {
-        
+
         Route::get('login', 'login')->name('user-login');
         Route::get('signup', 'signup')->name('user-signup');
 
@@ -30,6 +30,7 @@ Route::prefix('user')->group(function () {
     });
 });
 
+Route::get('tmp', [ChatRoomController::class, 'temp']);
 
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
 Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
