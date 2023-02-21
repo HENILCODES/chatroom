@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }}</title>
-    <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
-    <script src="{{url('js/jquery-3.6.3.js')}}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
+    <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 
@@ -28,7 +29,46 @@
         </div>
     </nav>
     @yield('body')
+    <footer class="bg-light text-center text-white mt-4">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #3b5998;"
+                    href="" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #55acee;"
+                    href="" role="button"><i class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #dd4b39;"
+                    href="" role="button"><i class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #ac2bac;"
+                    href="" role="button"><i class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #0082ca;"
+                    href="" role="button"><i class="fab fa-linkedin-in"></i></a>
+                <!-- Github -->
+                <a class="btn text-white btn-floating m-1 rounded-circle" style="background-color: #333333;"
+                    href="" role="button"><i class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020
+            <a class="text-decoration-none" href="https://henilcode.rf.gd/">Henil Code</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 </body>
-<script src="{{url('js/bootstrap.bundle.js')}}"></script>
+<script src="{{ url('js/bootstrap.bundle.js') }}"></script>
 
 </html>
