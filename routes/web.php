@@ -30,8 +30,6 @@ Route::prefix('user')->group(function () {
     });
 });
 
-Route::get('tmp', [ChatRoomController::class, 'temp']);
-
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
 Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 

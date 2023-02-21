@@ -41,8 +41,6 @@
         </section>
     </div>
     <script>
-        var element = document.getElementById("msger-chat");
-        element.scrollTop = element.scrollHeight;
         var room_name = "<?php echo $room_name; ?>";
         var token = $("input[name='_token']").val();
         var users_id = 2;
