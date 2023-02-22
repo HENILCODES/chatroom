@@ -61,7 +61,7 @@
                 <div class="desd"></div>
             </div>
             <div class="box1_bottm">
-                <span class="crea">Don't have an account?</span> <a href="{{ route('user-signup') }}" class="sign_up">
+                <span class="crea">Don't have an account?</span> <a href="{{ route('register') }}" class="sign_up">
                     Sign up</a>
             </div>
         </div>

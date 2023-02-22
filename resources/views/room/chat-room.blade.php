@@ -43,7 +43,7 @@
     <script>
         var room_name = "<?php echo $room_name; ?>";
         var token = $("input[name='_token']").val();
-        var users_id = 2;
+        var users_id = {{Auth::user()->id}};
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

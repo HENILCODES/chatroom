@@ -21,7 +21,6 @@ $(document).ready(function () {
             success: function (data) {
                 var $target = $("#msger-chat");
                 $target.animate({ scrollTop: $target.height()*5 }, 1000);
-                // $('#msger-chat').scrollTop($('#msger-chat').prop('scrollHeight'));
                 $("#msger-chat").empty();
                 displayMessage(data);
             },

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }}</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
     <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
@@ -21,14 +22,44 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="ms-auto ps-3">
-                    <a href="{{ route('user-signup') }}" class="fs-4 text-decoration-none text-black me-3"> Sign up </a>
+            @guest
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="ms-auto ps-3">
+                        <a href="{{ route('login') }}" class="fs-4 text-decoration-none text-black me-3"> Log in </a>
+                    </div>
                 </div>
-            </div>
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="fs-4 text-decoration-none text-black ms-2" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+
+        @endguest
         </div>
     </nav>
+
     @yield('body')
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            <h1>
+                {{ session('status') }}
+            </h1>
+        </div>
+    @endif
     <footer class="bg-light text-center text-white mt-4">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
