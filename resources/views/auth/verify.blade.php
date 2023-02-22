@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') Verify Your email address @endsection
 
 @section('content')
 <div class="container">
