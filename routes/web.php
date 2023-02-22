@@ -37,4 +37,3 @@ Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name(
 
 Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
 Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
-Route::post('getnewchat', [ChatRoomController::class, 'getNewChat'])->name('get-new-chat');

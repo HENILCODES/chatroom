@@ -43,9 +43,4 @@ class ChatRoomController extends Controller
         $chat = Message::where('rooms_name', $request->room_name)->get();
         return $chat;
     }
-    function getNewChat(Request $request)
-    {
-        $chat = Message::where('rooms_name', $request->room_name)->where('id', '>', $request->last_chat_id)->get();
-        return $chat;
-    }
 }
