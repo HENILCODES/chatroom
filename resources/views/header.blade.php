@@ -36,15 +36,10 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="fs-4 text-decoration-none text-black ms-2" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                        {{ Form::open(['route' => 'logout']) }}
+                        {{ Form::token() }}
+                        {{ Form::submit('log out', ['class' => 'btn btn-light text-start text-decoration-none text-muted w-100']) }}
+                        {{ Form::close() }}
                     </div>
                 </li>
 

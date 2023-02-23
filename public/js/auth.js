@@ -1,5 +1,5 @@
 var ShowHide = document.getElementById("show_hide_password");
-var User_password = document.getElementById("password");
+var User_password = document.getElementById("confirmPassword");
 
 // password show hide
 ShowHide.addEventListener("click", function () {
@@ -16,7 +16,7 @@ ShowHide.addEventListener("click", function () {
 
 // hide show icon
 User_password.addEventListener("keyup", function () {
-    var User_password_value = document.getElementById("password").value;
+    var User_password_value = document.getElementById("confirmPassword").value;
     if (User_password_value.length < 1) {
         document.getElementById("show_hide_password").style.display = "none";
     } else {

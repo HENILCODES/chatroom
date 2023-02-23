@@ -16,50 +16,46 @@
                     </div>
                 </div>
                 <div class="infor">
-                    <form method="POST" action="{{ route('register') }}" autocomplete="off">
-                        @csrf
-                        <div class="input_box">
-                            <span class="TagIn">User name</span>
-                            <input type="text" name="name" class="input" placeholder="type username"
-                                value="{{ old('name') }}" id="name" required title="User Name">
-                            @error('name')
-                                <div class="error-msg">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="input_box">
-                            <span class="TagIn">Email Address</span>
-                            <input type="email" name="email" class="input" placeholder="type email" id="email"
-                                value="{{ old('email') }}" required title="Email Address">
-                            @error('email')
-                                <div class="error-msg">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="input_box">
-                            <span class="TagIn">password</span>
-                            <div class="passwor">
-                                <input type="password" name="password" class="inputx" placeholder="type Password" required
-                                    title="Password">
+                    {{ Form::open(['route' => 'register', 'autocomplete' => 'off', 'method' => 'post']) }}
+                    {{ Form::token() }}
+                    <div class="input_box">
+                        {{ Form::label('name', 'User Name', ['class' => 'TagIn']) }}
+                        {{ Form::text('name', '', ['class' => 'input', 'placeholder' => 'type username', 'title' => 'User Name', 'required' => 'true']) }}
+                        @error('name')
+                            <div class="error-msg">
+                                <strong>{{ $message }}</strong>
                             </div>
-                            @error('password')
-                                <div class="error-msg">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="input_box">
-                            <span class="TagIn">Confirm Password</span>
-                            <div class="passwor">
-                                <input type="password" name="password_confirmation" class="inputx"
-                                    placeholder="type Confirm Password" id="password" required title="Password">
-                                <span class="bi bi-eye-fill" id="show_hide_password"></span>
+                        @enderror
+                    </div>
+                    <div class="input_box">
+                        {{ Form::label('email', 'email address', ['class' => 'TagIn']) }}
+                        {{ Form::email('email', '', ['class' => 'input', 'id' => 'email', 'placeholder' => 'type email', 'required' => 'true']) }}
+                        @error('email')
+                            <div class="error-msg">
+                                <strong>{{ $message }}</strong>
                             </div>
+                        @enderror
+                    </div>
+                    <div class="input_box">
+                        {{ Form::label('password', 'password', ['class' => 'TagIn']) }}
+                        <div class="passwor">
+                            {{ Form::password('password', ['class' => 'inputx', 'id' => 'password', 'placeholder' => 'type password', 'required' => 'true']) }}
                         </div>
-                        <button class="Log_Button" type="submit" id="login">Sign Up</button>
-                    </form>
+                        @error('password')
+                            <div class="error-msg">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="input_box">
+                        {{ Form::label('confirmPassword', 'Confirm Password', ['class' => 'TagIn']) }}
+                        <div class="passwor">
+                            {{ Form::password('password_confirmation', ['class' => 'inputx', 'id' => 'confirmPassword', 'placeholder' => 'type password', 'required' => 'true']) }}
+                            <span class="bi bi-eye-fill" id="show_hide_password"></span>
+                        </div>
+                    </div>
+                    {{ Form::submit('Sign Up', ['class' => 'Log_Button', 'id' => 'login']) }}
+                    {{ Form::close() }}
                 </div>
                 <div class="or">
                     <div class="desd"></div>

@@ -31,17 +31,10 @@
                                 style="letter-spacing: 2px;">Exite Group</a>
                         </li>
                         <div class="nav-link">
-                            {{-- <a class="fs-4 text-decoration-none text-black ms-2" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a> --}}
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="btn btn-light text-start text-decoration-none text-muted w-100"
-                                    type="submit">Log out</button>
-                            </form>
+                            {{ Form::open(['route' => 'logout']) }}
+                            {{ Form::token() }}
+                            {{ Form::submit('log out', ['class' => 'btn btn-light text-start text-decoration-none text-muted w-100']) }}
+                            {{ Form::close() }}
                         </div>
                     </ul>
                 </div>
@@ -49,10 +42,9 @@
             <main class="msger-chat" id="msger-chat">
             </main>
             <div class="msger-inputarea">
-                @csrf
-                <input type="text" autocomplete="off" class="msger-input form-control" id="chat"
-                    placeholder="Enter your message...">
-                <button type="submit" class="msger-send-btn" id="send">Send</button>
+                {{ Form::token() }}
+                {{ Form::text('name', '', ['class' => 'msger-input form-control', 'id' => 'chat', 'placeholder' => 'type hear.... ','autocomplete'=>'off']) }}
+                {{ Form::submit('Send', ['class' => 'msger-send-btn', 'id' => 'send']) }}
             </div>
         </section>
     </div>
