@@ -12,9 +12,11 @@ class Message extends Model
         'chat',
         'rooms_name',
         'users_id',
+        'sender',
     ];
 
-    public function getCreatedAtAttribute($value){
-        return date('d-M-Y h:i:s a',strtotime($value));
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d-M-Y h:i:s a', strtotime($value));
     }
 }

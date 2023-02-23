@@ -40,7 +40,7 @@ class ChatRoomController extends Controller
 
     function getChat(Request $request)
     {
-        $chat = Message::where('rooms_name', $request->room_name)->get();
+        $chat = Message::select('messages.*', 'users.name as sender')->join('users', 'users.id', '=', 'messages.users_id')->where('messages.rooms_name', 'college')->get();
         return $chat;
     }
 }

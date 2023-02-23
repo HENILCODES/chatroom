@@ -23,6 +23,7 @@ $(document).ready(function () {
                 $target.animate({ scrollTop: $target.height()*5 }, 1000);
                 // $('#msger-chat').scrollTop($('#msger-chat').prop('scrollHeight'));
                 $("#msger-chat").empty();
+                console.log(data);
                 displayMessage(data);
             },
             error: function (jqXhr, textStatus, errorMessage) {
@@ -36,7 +37,7 @@ $(document).ready(function () {
                 `<div class="msg ${
                     element["users_id"] == users_id ? "right-msg" : "left-msg"
                 }"> <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">${
-                    element["users_id"]
+                    element["sender"]
                 }</div> <div class="msg-info-time">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text"> ${
