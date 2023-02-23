@@ -48,12 +48,12 @@
                     </div>
                 </li>
 
-        @endguest
+            @endguest
         </div>
     </nav>
 
     @yield('body')
-    
+
     @if (session('status'))
         <div class="alert alert-success" role="alert">
             <h1>
@@ -61,7 +61,7 @@
             </h1>
         </div>
     @endif
-    <footer class="bg-light text-center text-white mt-4">
+    <footer class="bg-white text-center text-white mt-4 shadow-lg">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
             <!-- Section: Social media -->
@@ -94,7 +94,7 @@
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center p-3 text-muted">
             © 2020
             <a class="text-decoration-none" href="https://henilcode.rf.gd/">Henil Code</a>
         </div>

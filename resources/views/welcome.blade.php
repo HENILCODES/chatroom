@@ -16,7 +16,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="create" class="form-label fw-bold fs-3">Create Room</label>
-                            <input type="text" class="form-control fs-5 mt-2" name="name" id="create"
+                            <input type="text" class="form-control fs-5 mt-2" name="name" id="create" required
                                 value="{{ old('name') }}" placeholder="type hear" aria-describedby="createRoom">
                             @error('name')
                                 <div id="createRoom" class="form-text text-end text-danger">{{ $message }}</div>
@@ -42,7 +42,7 @@
                         <div class="mb-3">
                             <label for="join" class="form-label fw-bold fs-3">Join Room</label>
                             <input type="text" class="form-control fs-5 mt-2" placeholder="type hear" id="join"
-                                name="name" aria-describedby="joinRoom">
+                                required name="name" aria-describedby="joinRoom">
                             {{-- <div id="joinRoom" class="form-text text-end text-danger">We'll nevenyone else.</div> --}}
                         </div>
                         <div class="mt-4">

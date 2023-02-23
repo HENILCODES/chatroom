@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url('css/chatroom.css') }}">
 </head>
+
 <body>
     <div class="box">
         <section class="msger">
@@ -25,8 +26,23 @@
                     </span>
                     <ul class="list-group position-fixed shadow" id="option-chat"
                         style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
-                        <a href="/" class="list-group-item list-group-item-action text-muted"
-                            style="letter-spacing: 2px;">Exite Group</a>
+                        <li class="nav-link">
+                            <a href="/" class="list-group-item w-100 list-group-item-action text-muted"
+                                style="letter-spacing: 2px;">Exite Group</a>
+                        </li>
+                        <div class="nav-link">
+                            {{-- <a class="fs-4 text-decoration-none text-black ms-2" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a> --}}
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-link text-start text-decoration-none text-black w-100"
+                                    type="submit">Log out</button>
+                            </form>
+                        </div>
                     </ul>
                 </div>
             </header>
@@ -43,7 +59,7 @@
     <script>
         var room_name = "<?php echo $room_name; ?>";
         var token = $("input[name='_token']").val();
-        var users_id = {{Auth::user()->id}};
+        var users_id = {{ Auth::user()->id }};
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

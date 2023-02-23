@@ -35,10 +35,11 @@ Route::get('/', function () {
 Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
 Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 
-Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
-
-Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
-Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
+Route::middleware("auth")->group(function () {
+    Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+    Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
+    Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
