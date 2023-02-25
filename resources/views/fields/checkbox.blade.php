@@ -1,0 +1,1 @@
+{{ Form::checkbox($name,$value, $checked, $attributes) }}

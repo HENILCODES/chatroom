@@ -1,0 +1,1 @@
+{{ Form::radio($name, $value, $checked, $attributes) }}

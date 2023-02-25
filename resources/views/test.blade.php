@@ -12,83 +12,115 @@
         <div class="input-group">
             @php $label = array('name' => 'name', 'value' => 'Student Name', 'attributes' => array('class' => 'input-group-text w-25 justify-content-center')) @endphp
             @include('fields.label', $label)
-
-            {{ Form::text('name', '', ['class' => 'form-control', 'id' => 'name', 'required' => true, 'placeholder' => 'Student Name']) }}
+            @php $text = array('name' => 'name', 'value' => '', 'attributes' => array('class' => 'form-control', 'id' => 'name', 'required' => true, 'placeholder' => 'Student Name')) @endphp
+            @include('fields.text', $text)
         </div>
         <div class="input-group">
             @php $label = array('name' => 'password', 'value' => 'Student Password', 'attributes' => array('class' => 'input-group-text w-25 justify-content-center')) @endphp
             @include('fields.label', $label)
-            {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'id' => 'password', 'required' => 'true']) }}
+            @php $password = array('name' => 'password','attributes' => array('class' => 'form-control', 'placeholder' => 'Password', 'id' => 'password', 'required' => 'true')) @endphp
+            @include('fields.password', $password)
         </div>
         <div class="input-group">
             @php $label = array('name' => 'email', 'value' => 'Student email', 'attributes' => array('class' => 'input-group-text w-25 justify-content-center')) @endphp
             @include('fields.label', $label)
-            {{ Form::email('email', '', ['class' => 'form-control', 'placeholder' => 'email', 'id' => 'email']) }}
+            @php $email = array('name' => 'email', 'value' => '', 'attributes' => array('class' => 'form-control', 'placeholder' => 'email', 'id' => 'email')) @endphp
+            @include('fields.email', $email)
         </div>
         <div class="input-group">
-            {{ Form::label('contact', 'Student contact', ['class' => 'input-group-text w-25 justify-content-center']) }}
-            {{ Form::tel('contact', '', ['class' => 'form-control', 'id' => 'contact', 'required' => true, 'placeholder' => 'enter Contact']) }}
+            @php $label = array('name' => 'contact', 'value' => 'Student contact', 'attributes' => array('class' => 'input-group-text w-25 justify-content-center')) @endphp
+            @include('fields.label', $label)
+            @php $tel = array('name' => 'contact', 'value' => '', 'attributes' => array('class' => 'form-control', 'id' => 'contact', 'required' => true, 'placeholder' => 'enter contact')) @endphp
+            @include('fields.tel', $tel)
         </div>
         <div class="input-group">
-            {{ Form::label('semester', 'semester', ['class' => 'input-group-text']) }}
-            {{ Form::select('semester', ['1' => '1', '2' => '2'], '2 ', ['class' => 'form-select', 'id' => 'semester']) }}
+            @php $label = array('name' => 'semester', 'value' => 'Student semeste', 'attributes' => array('class' => 'input-group-text w-25 justify-content-center')) @endphp
+            @include('fields.label', $label)
+            @php $semester = array('name' => 'semester', 'value' => ['1' => '1', '2' => '2'], 'attributes' => array('class' => 'form-select', 'id' => 'semester')) @endphp
+            @include('fields.select', $semester)
         </div>
         <div class="input-group">
             <label class="input-group-text">Hobby</label>
             <div class="form-check m-2">
-                {{ Form::checkbox('hobby[]', 'programming', true, ['class' => 'form-check-input', 'id' => 'programming']) }}
-                {{ Form::label('programming', 'programming') }}
+                @php $checkbox = array('name' => 'hobby[]', 'value'=>'programming','checked' => false, 'attributes' => array('class' => 'form-check-input', 'id' => 'programming')) @endphp
+                @include('fields.checkbox', $checkbox)
+                @php $label = array('name' => 'programming', 'value' => 'programming', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
             <div class="form-check m-2">
-                {{ Form::checkbox('hobby[]', 'cricket', true, ['class' => 'form-check-input', 'id' => 'cricket']) }}
-                {{ Form::label('cricket', 'cricket') }}
+                @php $checkbox = array('name' => 'hobby[]', 'value'=>'cricket','checked' => false, 'attributes' => array('class' => 'form-check-input', 'id' => 'cricket')) @endphp
+                @include('fields.checkbox', $checkbox)
+                @php $label = array('name' => 'cricket', 'value' => 'cricket', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
             <div class="form-check m-2">
-                {{ Form::checkbox('hobby[]', 'football', false, ['class' => 'form-check-input', 'id' => 'football']) }}
-                {{ Form::label('football', 'football') }}
+                @php $checkbox = array('name' => 'hobby[]', 'value'=>'football','checked' => false, 'attributes' => array('class' => 'form-check-input', 'id' => 'football')) @endphp
+                @include('fields.checkbox', $checkbox)
+                @php $label = array('name' => 'football', 'value' => 'football', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
         </div>
         <div class="input-group">
             <label class="input-group-text">Gender</label>
             <div class="form-check m-2">
-                {{ Form::radio('gender', 'male', true, ['class' => 'form-check-input', 'id' => 'male']) }}
-                {{ Form::label('male', 'male') }}
+                @php $radio = array('name' => 'gender', 'value' => 'male','checked'=>false, 'attributes' => array('class' => 'form-check-input', 'id' => 'male')) @endphp
+                @include('fields.radio', $radio)
+                @php $label = array('name' => 'male', 'value' => 'male', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
             <div class="form-check m-2">
-                {{ Form::radio('gender', 'female', false, ['class' => 'form-check-input', 'id' => 'female']) }}
-                {{ Form::label('female', 'female') }}
+                @php $radio = array('name' => 'gender', 'value' => 'female','checked'=>false, 'attributes' => array('class' => 'form-check-input', 'id' => 'female')) @endphp
+                @include('fields.radio', $radio)
+                @php $label = array('name' => 'female', 'value' => 'female', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
             <div class="form-check m-2">
-                {{ Form::radio('gender', 'other', false, ['class' => 'form-check-input', 'id' => 'other']) }}
-                {{ Form::label('other', 'other') }}
+                @php $radio = array('name' => 'gender', 'value' => 'other','checked'=>false, 'attributes' => array('class' => 'form-check-input', 'id' => 'other')) @endphp
+                @include('fields.radio', $radio)
+                @php $label = array('name' => 'other', 'value' => 'other', 'attributes' => array('')) @endphp
+                @include('fields.label', $label)
             </div>
         </div>
         <div class="input-group w-50">
-            {{ Form::label('color', 'favorite color', ['class' => 'input-group-text']) }}
-            {{ Form::color('color', '', ['class' => 'form-control form-control-color', 'id' => 'color']) }}
+            @php $label = array('name' => 'color', 'value' => 'favorite color', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $color = array('name' => 'color', 'value' => '', 'attributes' => array('class' => 'form-control form-control-color')) @endphp
+            @include('fields.color', $color)
         </div>
         <div class="input-group">
-            {{ Form::label('interest', 'Interest in coding', ['class' => 'input-group-text']) }}
-            {{ Form::selectRange('interest', 0, 100, ['class' => 'form-control']) }}
+            @php $label = array('name' => 'interest', 'value' => 'Interest coding', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $range = array('name' => 'interest', 'min'=>0,'max'=>20, 'attributes' => array('class' => 'form-control')) @endphp
+            @include('fields.selectRange', $range)
         </div>
         <div class="input-group">
-            {{ Form::label('dob', 'Date Of Birth', ['class' => 'input-group-text']) }}
-            {{ Form::date('dob', '', ['class' => 'form-control']) }}
+            @php $label = array('name' => 'dob', 'value' => 'Date of birth', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $date = array('name' => 'dob', 'value' => '', 'attributes' => array('class' => 'form-control')) @endphp
+            @include('fields.date', $date)
         </div>
         <div class="input-group">
-            {{ Form::label('month', 'month', ['class' => 'input-group-text']) }}
-            {{ Form::selectMonth('month', ['class' => 'form-select']) }}
+            @php $label = array('name' => 'month', 'value' => 'Month', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $month = array('name'=>'month','attributes'=> array('class' => 'form-select')) @endphp
+            @include('fields.selectMonth', $month)
         </div>
         <div class="input-group">
-            {{ Form::label('url', 'Website', ['class' => 'input-group-text']) }}
-            {{ Form::url('website', '', ['class' => 'form-control']) }}
+            @php $label = array('name' => 'url', 'value' => 'website', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $url = array('name'=>'website','value'=>'', 'attributes'=> array('class' => 'form-control')) @endphp
+            @include('fields.url', $url)
         </div>
         <div class="input-group">
-            {{ Form::label('photo', 'photo', ['class' => 'input-group-text']) }}
-            {{ Form::file('photo', ['class' => 'form-control form-control-lg']) }}
+            @php $label = array('name' => 'photo', 'value' => 'photo', 'attributes' => array('class' => 'input-group-text')) @endphp
+            @include('fields.label', $label)
+            @php $file = array('name'=>'photo', 'attributes'=> array('class' => 'form-control form-control-lg')) @endphp
+            @include('fields.file',$file)
         </div>
         <div class="mt-5 text-center">
-            {{ Form::submit('submit', ['class' => 'btn btn-primary w-50']) }}
+            @php $file = array('value'=>'submit', 'attributes'=> array('class' => 'btn btn-primary w-50')) @endphp
+            @include('fields.submit',$file)
+
         </div>
         {{ Form::close() }}
     </div>

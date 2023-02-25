@@ -1,0 +1,1 @@
+{{ Form::selectRange($name, $min, $max, $attributes) }}
