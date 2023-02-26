@@ -36,7 +36,7 @@ Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('crea
 Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 
 Route::middleware("auth")->group(function () {
-    Route::get('chatroom/{room}', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+    Route::get('chatroom', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
     Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
     Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
 });

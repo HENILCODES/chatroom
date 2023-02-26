@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    getMessage();
+    getMessage('Global Chat');
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
     });
@@ -11,17 +11,25 @@ $(document).ready(function () {
     $("#send").click(function () {
         sendMessage();
     });
-    function getMessage() {
+    
+    $(".block").click(function () {
+        let room_id =$(this).attr('id');
+        getMessage(room_id);
+    });
+
+    function getMessage(room) {
+        $("#room-name").html(room);
+        $("#room-image").attr("src", "http://127.0.0.1:8000/storage/henil.jpg");
+        
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",
             data: {
                 _token: token,
-                room_name: room_name,
+                room_name: room,
             },
             success: function (data) {
                 var $target = $("#msger-chat");
                 $target.animate({ scrollTop: $target.height() * 5 }, 1000);
-                // $('#msger-chat').scrollTop($('#msger-chat').prop('scrollHeight'));
                 $("#msger-chat").empty();
                 displayMessage(data);
             },
@@ -48,6 +56,8 @@ $(document).ready(function () {
     }
     function sendMessage() {
         var chat = $("#chat").val();
+        let room_name = $("#room-name").html();
+        
         if (chat.trim().length > 0) {
             $.ajax("http://127.0.0.1:8000/send", {
                 type: "POST",
@@ -58,7 +68,7 @@ $(document).ready(function () {
                     users_id: users_id,
                 },
                 success: function () {
-                    getMessage();
+                    getMessage(room_name);
                     $("#chat").val("");
                 },
                 error: function (jqXhr, textStatus, errorMessage) {

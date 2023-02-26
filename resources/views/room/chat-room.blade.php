@@ -21,13 +21,14 @@
                 <div class="left-box">
                     <header class="d-flex">
                         <div class="Himg">
-                            <div class="imgBox"><img src="{{ url('storage/henil.jpg') }}" alt="useer"
-                                    class="c-pointer">
+                            <div class="imgBox">
+                                {{-- <img src="{{ url('storage/henil.jpg') }}" alt="useer" class="c-pointer"> --}}
+                                {{ Auth::user()->name }}
                             </div>
                         </div>
                         <div class="option d-flex">
                             <div class="option-icon p-r">
-                                <img src="{{url('storage/status.png')}}" alt="Status" class="c-pointer">
+                                <img src="{{ url('storage/status.png') }}" alt="Status" class="c-pointer">
                             </div>
                             <div class="option-icon p-r"><i class="bi bi-chat-left-text-fill"></i></div>
                             <div class="option-icon"><i class="bi bi-three-dots-vertical"></i></div>
@@ -41,57 +42,42 @@
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
                     <div class="user-friend">
-                        <div class="block">
-                            <div class="friend-block d-flex">
-                                <div class="imgB">
-                                    <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}" alt="H">
+                        @forelse ($rooms as $room)
+                            <div class="block" id="{{ $room->name }}">
+                                <div class="friend-block d-flex">
+                                    <div class="imgB">
+                                        <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}"
+                                                alt="H">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="friend-detail w-100">
-                                    <div class="friend-name d-flex">
-                                        <div class="f-name"> <span>Henil</span></div>
-                                        <div class="f-active"> <span class="lig-color">9:30 am</span></div>
-                                    </div>
-                                    <div class="friend-last-chat d-flex">
-                                        <div class="left"><i class="bi bi-check2"></i><span
-                                                class="lig-color Prchat">Hello</span></div>
-                                        <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block">
-                            <div class="friend-block d-flex">
-                                <div class="imgB">
-                                    <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}" alt="H">
-                                    </div>
-                                </div>
-                                <div class="friend-detail w-100">
-                                    <div class="friend-name d-flex">
-                                        <div class="f-name"> <span>Henil</span></div>
-                                        <div class="f-active"> <span class="lig-color">9:30 am</span></div>
-                                    </div>
-                                    <div class="friend-last-chat d-flex">
-                                        <div class="left"><i class="bi bi-check2"></i><span
-                                                class="lig-color Prchat">Hello</span></div>
-                                        <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i></div>
+                                    <div class="friend-detail w-100">
+                                        <div class="friend-name d-flex">
+                                            <div class="f-name"> <span>{{ $room->name }}</span></div>
+                                            <div class="f-active"> <span class="lig-color">9:30 am</span></div>
+                                        </div>
+                                        <div class="friend-last-chat d-flex">
+                                            <div class="left"><i class="bi bi-check2"></i><span
+                                                    class="lig-color Prchat">Hello</span></div>
+                                            <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        @empty
+                            <h1>Not Found</h1>
+                        @endforelse
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="w-100">
                 <div class="right-box">
                     <section class="msger">
                         <header class="msger-header">
                             <div class="msger-header-title fs-4 fw-bold d-flex">
-                                <div class="group-img"><img src="{{ url('storage/henil.jpg') }}" alt="H">
-                                </div>
-                                <span class="ms-3">
-                                  {{ $room_name }}
-                                </span>
+                                <div class="group-img"><img id="room-image"></div>
+                                <span class="ms-3" id="room-name">Global Chat</span>
                             </div>
                             <div class="msger-header-options">
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
@@ -99,11 +85,6 @@
                                 </span>
                                 <ul class="list-group position-fixed shadow" id="option-chat"
                                     style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
-                                    <li class="nav-link">
-                                        <a href="/"
-                                            class="list-group-item w-100 list-group-item-action text-muted"
-                                            style="letter-spacing: 2px;">Exite Group</a>
-                                    </li>
                                     <div class="nav-link">
                                         {{ Form::open(['route' => 'logout']) }}
                                         {{ Form::token() }}
@@ -116,18 +97,34 @@
                         <main class="msger-chat" id="msger-chat">
                         </main>
                         <div class="msger-inputarea">
+                            <button class="msger-option-btn shadow bi bi-link-45deg"></button>
                             {{ Form::token() }}
-                            {{ Form::text('name', '', ['class' => 'msger-input', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
-                            {{ Form::submit('Send', ['class' => 'msger-send-btn', 'id' => 'send']) }}
+                            {{ Form::text('name', '', ['class' => 'msger-input shadow', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
+                            <button class="msger-send-btn shadow" id="send"><i
+                                    class="bi bi-send-fill fs-6"></i></button>
                         </div>
                     </section>
+                    {{-- <div class="center-box center">
+                        <div class="icon-box">
+                            <img src="{{ url('storage/DefaultLogo.png') }}" alt="Logo" />
+                        </div>
+                        <div class="detail">
+                            <div class="head">
+                                <span class="title">WhatsApp Web</span>
+                            </div>
+                            <div class="data">
+                                Send and receive messages without keeping your
+                                phone online.<br />Use WhatsApp on up to 4 linked devices and 1 phone at the same
+                                time.
+                            </div>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        var room_name = "<?php echo $room_name; ?>";
         var token = $("input[name='_token']").val();
         var users_id = {{ Auth::user()->id }};
     </script>

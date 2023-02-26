@@ -24,12 +24,8 @@ class ChatRoomController extends Controller
 
     function setChatRoom(Request $request)
     {
-        $room_name = $request['room'];
-        if (Room::where('name', $room_name)->count() == 1) {
-            return view('room.chat-room', compact('room_name'));
-        } else {
-            return redirect()->back();
-        }
+        $rooms = Room::get();
+        return view('room.chat-room', compact('rooms'));
     }
     function sendChat(Request $request)
     {
