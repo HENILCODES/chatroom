@@ -17,6 +17,7 @@
                     <div class="mb-3">
                         {{ Form::label('create', 'Create Room', ['class' => 'form-label fw-bold fs-3']) }}
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         @error('name')
                             <div id="createRoom" class="form-text text-end text-danger">{{ $message }}</div>
                         @enderror

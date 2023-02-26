@@ -19,7 +19,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 // Route::prefix('user')->group(function () {
 
 //     Route::controller(UserController::class)->group(function () {

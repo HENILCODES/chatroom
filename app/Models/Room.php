@@ -11,5 +11,6 @@ class Room extends Model
     public $fillable = [
         'name',
         'id',
+        'user_id',
     ];
 }

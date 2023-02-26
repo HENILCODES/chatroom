@@ -10,9 +10,8 @@ class Message extends Model
     use HasFactory;
     public $fillable = [
         'chat',
-        'rooms_name',
-        'users_id',
-        'sender',
+        'room_id',
+        'user_id',
     ];
 
     public function getCreatedAtAttribute($value)

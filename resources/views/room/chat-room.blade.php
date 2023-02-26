@@ -31,8 +31,18 @@
                                 <img src="{{ url('storage/status.png') }}" alt="Status" class="c-pointer">
                             </div>
                             <div class="option-icon p-r"><i class="bi bi-chat-left-text-fill"></i></div>
-                            <div class="option-icon"><i class="bi bi-three-dots-vertical"></i></div>
+                            <div class="option-icon"><i class="bi bi-three-dots-vertical" id="action-user-option"></i>
+                            </div>
                         </div>
+                        <ul class="list-group position-fixed shadow mt-5" id="option-user"
+                            style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                            <div class="nav-link">
+                                {{ Form::open(['route' => 'logout']) }}
+                                {{ Form::token() }}
+                                {{ Form::submit('log out', ['class' => 'btn btn-light text-start text-decoration-none text-muted w-100']) }}
+                                {{ Form::close() }}
+                            </div>
+                        </ul>
                     </header>
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
@@ -43,11 +53,10 @@
                     </div>
                     <div class="user-friend">
                         @forelse ($rooms as $room)
-                            <div class="block" id="{{ $room->name }}">
-                                <div class="friend-block d-flex">
+                            <div class="block" id="{{ $room->id }}">
+                                <div class="friend-block d-flex" id="{{$room->name}}">
                                     <div class="imgB">
-                                        <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}"
-                                                alt="H">
+                                        <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}" alt="H">
                                         </div>
                                     </div>
                                     <div class="friend-detail w-100">
@@ -73,12 +82,13 @@
             </div>
             <div class="w-100">
                 <div class="right-box">
-                    <section class="msger">
+                    <section class="msger" style="display: none;" id="right-chat-box">
                         <header class="msger-header">
                             <div class="msger-header-title fs-4 fw-bold d-flex">
                                 <div class="group-img"><img id="room-image"></div>
-                                <span class="ms-3" id="room-name">Global Chat</span>
+                                <span class="ms-3" id="room-name"></span>
                             </div>
+                            <input type="hidden" id="get-room-id">
                             <div class="msger-header-options">
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
                                     <i class="fs-4 mt-1 bi bi-three-dots-vertical"></i>
@@ -104,7 +114,8 @@
                                     class="bi bi-send-fill fs-6"></i></button>
                         </div>
                     </section>
-                    {{-- <div class="center-box center">
+
+                    <div class="center-box center" id="right-default-box">
                         <div class="icon-box">
                             <img src="{{ url('storage/DefaultLogo.png') }}" alt="Logo" />
                         </div>
@@ -118,7 +129,7 @@
                                 time.
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,7 +137,7 @@
 
     <script>
         var token = $("input[name='_token']").val();
-        var users_id = {{ Auth::user()->id }};
+        var user_id = {{ Auth::user()->id }};
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>
