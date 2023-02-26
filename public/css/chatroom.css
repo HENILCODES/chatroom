@@ -23,16 +23,22 @@
     background: var(--msger-bg);
 }
 
-.group-img {
+.group-img ,.chat-user-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
-.group-img img {
+.chat-user-img img{
     width: 100%;
-    height: 100%;
     overflow: hidden;
     border-radius: 50%;
+    height: 100%;
+}
+.group-img img{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    height: 100%;
 }
 
 .msger-header {
@@ -50,19 +56,6 @@
     padding: 10px;
     margin-bottom: 10px;
 }
-
-.msger-chat::-webkit-scrollbar {
-    width: 6px;
-}
-
-.msger-chat::-webkit-scrollbar-track {
-    background: #ddd;
-}
-
-.msger-chat::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
-}
-
 .msg {
     display: flex;
     align-items: flex-end;
@@ -74,8 +67,8 @@
 }
 
 .msg-img {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     margin-right: 10px;
     background: #ddd;
     background-repeat: no-repeat;
@@ -144,12 +137,16 @@
 .msger-input {
     flex: 1;
     background: #ddd;
+    border-radius: 20px;
+    outline: none;
+    padding-left: 18px;
 }
 
 .msger-send-btn {
     margin-left: 10px;
     background: rgb(0, 196, 65);
     color: #fff;
+    border-radius: 40px;
     font-weight: bold;
     cursor: pointer;
     transition: background 0.23s;

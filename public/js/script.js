@@ -35,9 +35,10 @@ $(document).ready(function () {
             $("#msger-chat").append(
                 `<div class="msg ${
                     element["users_id"] == users_id ? "right-msg" : "left-msg"
-                }"> <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;"> HP </div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">${
-                    element["sender"]
-                }</div> <div class="msg-info-time">${
+                }"> 
+                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/henil.jpg');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">
+                ${element["users_id"] == users_id ? "" : element["sender"]}
+                </div> <div class="msg-info-time">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text"> ${
                     element["chat"]

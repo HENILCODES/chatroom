@@ -117,7 +117,7 @@
                         </main>
                         <div class="msger-inputarea">
                             {{ Form::token() }}
-                            {{ Form::text('name', '', ['class' => 'msger-input form-control', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
+                            {{ Form::text('name', '', ['class' => 'msger-input', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
                             {{ Form::submit('Send', ['class' => 'msger-send-btn', 'id' => 'send']) }}
                         </div>
                     </section>

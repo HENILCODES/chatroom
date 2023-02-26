@@ -44,7 +44,7 @@ body {
 
 .main-box {
   background-color: #f0f2f5;
-  max-width: 1600px;
+  max-width: 1630px;
   margin: auto;
   height: 95vh;
   display: flex;
@@ -121,7 +121,7 @@ body {
   opacity: 0.5;
 }
 .main-box .user-friend {
-  height: 75vh;
+  height: 82vh;
   overflow-y: auto !important;
 }
 .main-box .user-friend .block {
@@ -233,6 +233,6 @@ body {
 
 *:-webkit-scrollbar-thumb {
   background-color: rgb(213, 213, 213);
-  border-radius: 6px;
+  border-radius: 5px;
   border: 3px solid transparent;
 }/*# sourceMappingURL=style.css.map */
