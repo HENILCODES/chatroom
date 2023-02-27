@@ -52,28 +52,32 @@
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
                     <div class="user-friend">
+                        {{-- $rooms in get user_rooms and room name value  --}}
                         @forelse ($rooms as $room)
-                            <div class="block" id="{{ $room->id }}">
-                                <div class="friend-block d-flex" id="{{$room->name}}">
-                                    <div class="imgB">
-                                        <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}" alt="H">
+                            {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
+                            @if ($room->user_id == Auth::user()->id)
+                                <div class="block room-block" id="{{ $room->room_id }}"> {{-- use id value in script file in load message in chat room use room id --}}
+                                    <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
+                                        <div class="imgB">
+                                            <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}"
+                                                    alt="H">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="friend-detail w-100">
-                                        <div class="friend-name d-flex">
-                                            <div class="f-name"> <span>{{ $room->name }}</span></div>
-                                            <div class="f-active"> <span class="lig-color">9:30 am</span></div>
-                                        </div>
-                                        <div class="friend-last-chat d-flex">
-                                            <div class="left"><i class="bi bi-check2"></i><span
-                                                    class="lig-color Prchat">Hello</span></div>
-                                            <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i>
+                                        <div class="friend-detail w-100">
+                                            <div class="friend-name d-flex">
+                                                <div class="f-name"> <span>{{ $room->name }}</span></div>
+                                                <div class="f-active"> <span class="lig-color">9:30 am</span></div>
+                                            </div>
+                                            <div class="friend-last-chat d-flex">
+                                                <div class="left"><i class="bi bi-check2"></i><span
+                                                        class="lig-color Prchat">Hello</span></div>
+                                                <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endif
                         @empty
                             <h1>Not Found</h1>
                         @endforelse
@@ -86,15 +90,15 @@
                         <header class="msger-header">
                             <div class="msger-header-title fs-4 fw-bold d-flex">
                                 <div class="group-img"><img id="room-image"></div>
-                                <span class="ms-3" id="room-name"></span>
+                                <span class="ms-3" id="chat-room-name"></span> {{-- that id use for display room name --}}
                             </div>
-                            <input type="hidden" id="get-room-id">
                             <div class="msger-header-options">
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
                                     <i class="fs-4 mt-1 bi bi-three-dots-vertical"></i>
                                 </span>
-                                <ul class="list-group position-fixed shadow" id="option-chat"
-                                    style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                                <input type="hidden" id="get-room-id">  {{-- it's input use for send message it access by room id in script.js  --}}
+                                <ul class="list-group position-fixed shadow" id="option-chat" style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                                    {{-- its use for logout --}}
                                     <div class="nav-link">
                                         {{ Form::open(['route' => 'logout']) }}
                                         {{ Form::token() }}
@@ -136,8 +140,8 @@
     </div>
 
     <script>
-        var token = $("input[name='_token']").val();
-        var user_id = {{ Auth::user()->id }};
+        var token = $("input[name='_token']").val(); // use for send and get message using token value
+        var user_id = {{ Auth::user()->id }};  //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

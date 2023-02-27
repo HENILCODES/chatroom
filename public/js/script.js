@@ -1,46 +1,48 @@
 $(document).ready(function () {
-    $("#right-chat-box").hide();
+    $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
+    // its use for toggle option 
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
     });
     $("#action-user-option").click(function () {
         $("#option-user").slideToggle();
     });
+
     $("#chat").on("keyup", function (element) {
-        if (element.which == 13) {
+        if (element.which == 13) {  //when user click enter send message
             $("#send").click();
         }
     });
     $("#send").click(function () {
-        sendMessage();
+        sendMessage();   //triggre function on click button send
     });
 
-    $(".block").click(function () {
+    $(".room-block").click(function () {
         $("#right-default-box").hide();
-        $("#right-chat-box").show();
-        let room_name = $(this).children().attr("id");
-        $("#room-name").html(room_name);
+        $("#right-chat-box").show(); //when click block show cht box
+        let room_name = $(this).children().attr("id");  //get room name in use id attributes
+        $("#chat-room-name").html(room_name);  // set chat room name 
 
-        let room_id = $(this).attr("id");
-        getMessage(room_id);
+        let room_id = $(this).attr("id"); //get room id use id attributes
+        getMessage(room_id);  // send group id to function and display message
     });
 
-    function getMessage(room) {
-        $("#get-room-id").val(room);
-        $("#room-image").attr("src", "http://127.0.0.1:8000/storage/henil.jpg");
+    function getMessage(roomid) {
+        $("#get-room-id").val(roomid); //stroe value of room id for send message 
+        $("#room-image").attr("src", "http://127.0.0.1:8000/storage/henil.jpg"); //stroe group image
 
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",
             data: {
                 _token: token,
-                room_id: room,
+                room_id: roomid,
             },
             success: function (data) {
                 var $target = $("#msger-chat");
-                $target.animate({ scrollTop: $target.height() * 5 }, 1000);
-                $("#msger-chat").empty();
-                displayMessage(data);
+                $target.animate({ scrollTop: $target.height() * 5 }, 1000);  //use for scroll chat room
+                $("#msger-chat").empty(); // befor load message clear div and load again
+                displayMessage(data); // load all message 
             },
             error: function (jqXhr, textStatus, errorMessage) {
                 console.log("Error" + errorMessage);
@@ -51,7 +53,7 @@ $(document).ready(function () {
         data.forEach((element) => {
             $("#msger-chat").append(
                 `<div class="msg ${
-                    element["user_id"] == user_id ? "right-msg" : "left-msg"
+                    element["user_id"] == user_id ? "right-msg" : "left-msg" //check user id equal to session id
                 }"> 
                 <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/henil.jpg');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name">
                 ${element["user_id"] == user_id ? "" : element["sender"]}

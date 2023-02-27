@@ -25,11 +25,11 @@ class ChatRoomRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|unique:rooms,name',
+            'name'=>'required',
         ];
     }
 
     public function messages(){
-        return ['name' => 'Room Name Alredy Exist'];
+        return ['name' => 'Room Name Required'];
     }
 }
