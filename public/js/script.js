@@ -30,6 +30,7 @@ $(document).ready(function () {
 
     function getMessage(roomid) {
         $("#get-room-id").val(roomid); //stroe value of room id for send message 
+        $("#add-member-form").val(roomid); //stroe value of room id for add member in room 
         $("#room-image").attr("src", "http://127.0.0.1:8000/storage/henil.jpg"); //stroe group image
 
         $.ajax("http://127.0.0.1:8000/get", {

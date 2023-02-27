@@ -15,11 +15,11 @@
 </head>
 
 <body>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="CreateRoom" tabindex="-1" aria-labelledby="CreateRoomLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Room</h1>
+                    <h1 class="modal-title fs-5" id="CreateRoomLabel">Create Room</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -28,9 +28,6 @@
                     <div class="mb-3">
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        @error('name')
-                            <div id="createRoom" class="form-text text-end text-danger">{{ $message }}</div>
-                        @enderror
                     </div>
                     </form>
                 </div>
@@ -42,8 +39,32 @@
             </div>
         </div>
     </div>
-    
-    
+    <div class="modal fade" id="AddMember" tabindex="-1" aria-labelledby="AddMemberLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AddMemberLabel">Add Member</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ Form::open(['route' => 'join-room', 'autocomplete' => 'off']) }}
+                    {{ Form::token() }}
+                    <div class="mb-3">
+                        {{ Form::text('user_id', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user id', 'id' => 'create', 'required' => true]) }}
+                        <input type="hidden" name="room_id" id="add-member-form">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ Form::submit('Add', ['class' => 'btn btn-primary']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+
+
 
     <div id="root" class="containers">
         <div class="main-box">
@@ -65,8 +86,9 @@
                             </div>
                         </div>
                         <ul class="list-group position-fixed shadow mt-5" id="option-user"
-                        style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
-                        <button type="button" class="btn btn-light text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Group </button>
+                            style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                            <button type="button" class="btn btn-light text-start" data-bs-toggle="modal"
+                                data-bs-target="#CreateRoom">Create Group </button>
                             <div class="nav-link">
                                 {{ Form::open(['route' => 'logout']) }}
                                 {{ Form::token() }}
@@ -78,7 +100,7 @@
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
-                            placeholder="Search or start new chat" contenteditable="true">
+                                placeholder="Search or start new chat" contenteditable="true">
                         </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
@@ -91,7 +113,7 @@
                                     <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                         <div class="imgB">
                                             <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}"
-                                                alt="H">
+                                                    alt="H">
                                             </div>
                                         </div>
                                         <div class="friend-detail w-100">
@@ -102,13 +124,14 @@
                                             <div class="friend-last-chat d-flex">
                                                 <div class="left"><i class="bi bi-check2"></i><span
                                                         class="lig-color Prchat">Hello</span></div>
-                                                <div class="right"><i class="bi bi-chevron-down" id="chat_more_op"></i>
+                                                <div class="right"><i class="bi bi-chevron-down"
+                                                        id="chat_more_op"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                @endif
+                            @endif
                         @empty
                             <h1>Not Found</h1>
                         @endforelse
@@ -131,12 +154,10 @@
                                 <ul class="list-group position-fixed shadow" id="option-chat"
                                     style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
                                     {{-- its use for logout --}}
-                                    <div class="nav-link">
-                                        {{ Form::open(['route' => 'logout']) }}
-                                        {{ Form::token() }}
-                                        {{ Form::submit('log out', ['class' => 'btn btn-light text-start text-decoration-none text-muted w-100']) }}
-                                        {{ Form::close() }}
-                                    </div>
+                                    <li class="nav-link">
+                                        <button class="btn btn-light w-100 text-start" data-bs-toggle="modal"
+                                            data-bs-target="#AddMember">Add Member</button>
+                                    </li>
                                 </ul>
                             </div>
                         </header>

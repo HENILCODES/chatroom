@@ -13,20 +13,21 @@ class ChatRoomController extends Controller
     public function createRoom(ChatRoomRequest $request)
     {
         $room = Room::create($request->all());
-        $users_rooms = array('user_id'=>$room->user_id,'room_id'=>$room->id,'type'=>'admin');
+        $users_rooms = array('user_id' => $room->user_id, 'room_id' => $room->id, 'type' => 'admin');
         User_room::create($users_rooms);
         return redirect()->route('set-chat-room');
     }
 
     public function joinRoom(Request $request)
     {
-        $room = $request->all();
+        $users_rooms = array('user_id' => $request->user_id, 'room_id' => $request->room_id, 'type' => 'member');
+        User_room::create($users_rooms);
         return redirect()->route('set-chat-room');
     }
 
     function setChatRoom(Request $request)
     {
-        $rooms = Room::select('user_rooms.*','rooms.name')->join('user_rooms','user_rooms.room_id','=','rooms.id')->get();
+        $rooms = Room::select('user_rooms.*', 'rooms.name')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->get();
         return view('room.chat-room', compact('rooms'));
     }
     function sendChat(Request $request)
@@ -38,7 +39,7 @@ class ChatRoomController extends Controller
 
     function getChat(Request $request)
     {
-        $chat = Message::select('messages.*', 'users.name as sender')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id','asc')->get();
+        $chat = Message::select('messages.*', 'users.name as sender')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
         return $chat;
     }
 }

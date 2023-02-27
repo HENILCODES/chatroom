@@ -18,8 +18,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+    return redirect()->route('set-chat-room');
+});
 // Route::prefix('user')->group(function () {
 
 //     Route::controller(UserController::class)->group(function () {
