@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\Room;
 use App\Models\User_room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChatRoomController extends Controller
 {
@@ -18,7 +19,14 @@ class ChatRoomController extends Controller
         return redirect()->route('set-chat-room');
     }
 
-    public function joinRoom(Request $request)
+    public function deleteRoom(Request $request)
+    {
+        User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
+        Room::find($request->room_id)->delete();
+        return redirect()->back();
+    }
+
+    public function addMember(Request $request)
     {
         $users_rooms = array('user_id' => $request->user_id, 'room_id' => $request->room_id, 'type' => 'member');
         User_room::create($users_rooms);

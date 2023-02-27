@@ -29,7 +29,6 @@
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -47,7 +46,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {{ Form::open(['route' => 'join-room', 'autocomplete' => 'off']) }}
+                    {{ Form::open(['route' => 'addMember-room', 'autocomplete' => 'off']) }}
                     {{ Form::token() }}
                     <div class="mb-3">
                         {{ Form::text('user_id', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user id', 'id' => 'create', 'required' => true]) }}
@@ -124,8 +123,24 @@
                                             <div class="friend-last-chat d-flex">
                                                 <div class="left"><i class="bi bi-check2"></i><span
                                                         class="lig-color Prchat">Hello</span></div>
-                                                <div class="right"><i class="bi bi-chevron-down"
-                                                        id="chat_more_op"></i>
+                                                <div class="right"><i class="bi bi-chevron-down" id="chat_more_op">
+                                                        <ul class="list-group position-fixed shadow"
+                                                            id="option-room-block"
+                                                            style="display:none;width:200px;margin-left: -185px;">
+                                                            <div class="nav-link">
+                                                                <form action="{{ route('delete-room') }}"
+                                                                    method="POST">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <input type="hidden" name="room_id"
+                                                                        value="{{ $room->room_id }}">
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger w-100">Delete
+                                                                        Group</button>
+                                                                </form>
+                                                            </div>
+                                                        </ul>
+                                                    </i>
                                                 </div>
                                             </div>
                                         </div>

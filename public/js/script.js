@@ -26,6 +26,7 @@ $(document).ready(function () {
 
         let room_id = $(this).attr("id"); //get room id use id attributes
         getMessage(room_id);  // send group id to function and display message
+
     });
 
     function getMessage(roomid) {

@@ -17,31 +17,20 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('set-chat-room');
+Route::get('home', function () {
+    return view('welcome');
 });
-// Route::prefix('user')->group(function () {
 
-//     Route::controller(UserController::class)->group(function () {
-
-//         Route::get('login', 'login')->name('user-login');
-//         Route::get('signup', 'signup')->name('user-signup');
-
-//         Route::post('store', 'store')->name('user-store');
-//         Route::post('check', 'check')->name('user-check');
-//     });
-// });
-
-Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
-Route::post('joinroom', [ChatRoomController::class, 'joinRoom'])->name('join-room');
 
 Route::middleware("auth")->group(function () {
-    Route::get('chatroom', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+    Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
+    Route::post('add', [ChatRoomController::class, 'addMember'])->name('addMember-room');
+    Route::get('/', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
     Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
     Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
+    Route::delete('deleteRoom', [ChatRoomController::class, 'deleteRoom'])->name('delete-room');
 });
 Auth::routes();
-Route::get('/test',function(){
+Route::get('/test', function () {
     return view('test');
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
