@@ -15,6 +15,36 @@
 </head>
 
 <body>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Room</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ Form::open(['route' => 'create-room', 'autocomplete' => 'off']) }}
+                    {{ Form::token() }}
+                    <div class="mb-3">
+                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        @error('name')
+                            <div id="createRoom" class="form-text text-end text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ Form::submit('Let\'s Create', ['class' => 'btn btn-primary']) }}
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+    
+    
+
     <div id="root" class="containers">
         <div class="main-box">
             <div class="box">
@@ -35,7 +65,8 @@
                             </div>
                         </div>
                         <ul class="list-group position-fixed shadow mt-5" id="option-user"
-                            style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                        style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                        <button type="button" class="btn btn-light text-start" data-bs-toggle="modal" data-bs-target="#exampleModal">Create Group </button>
                             <div class="nav-link">
                                 {{ Form::open(['route' => 'logout']) }}
                                 {{ Form::token() }}
@@ -47,7 +78,7 @@
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
-                                placeholder="Search or start new chat" contenteditable="true">
+                            placeholder="Search or start new chat" contenteditable="true">
                         </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
@@ -60,7 +91,7 @@
                                     <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                         <div class="imgB">
                                             <div class="friend-img"><img src="{{ url('storage/henil.jpg') }}"
-                                                    alt="H">
+                                                alt="H">
                                             </div>
                                         </div>
                                         <div class="friend-detail w-100">
@@ -77,7 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                                @endif
                         @empty
                             <h1>Not Found</h1>
                         @endforelse
@@ -96,8 +127,9 @@
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
                                     <i class="fs-4 mt-1 bi bi-three-dots-vertical"></i>
                                 </span>
-                                <input type="hidden" id="get-room-id">  {{-- it's input use for send message it access by room id in script.js  --}}
-                                <ul class="list-group position-fixed shadow" id="option-chat" style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                                <input type="hidden" id="get-room-id"> {{-- it's input use for send message it access by room id in script.js  --}}
+                                <ul class="list-group position-fixed shadow" id="option-chat"
+                                    style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
                                     {{-- its use for logout --}}
                                     <div class="nav-link">
                                         {{ Form::open(['route' => 'logout']) }}
@@ -141,7 +173,7 @@
 
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
-        var user_id = {{ Auth::user()->id }};  //stroe session value in that virable for access script.js file
+        var user_id = {{ Auth::user()->id }}; //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>
