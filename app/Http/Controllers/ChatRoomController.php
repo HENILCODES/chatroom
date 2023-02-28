@@ -19,12 +19,10 @@ class ChatRoomController extends Controller
         User_room::create($users_rooms);
         return redirect()->route('set-chat-room');
     }
-
     public function deleteRoom(Request $request)
     {
         User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
         Room::find($request->room_id)->delete();
-        
         return redirect()->back();
     }
     public function logoutRoom(Request $request)
@@ -32,7 +30,6 @@ class ChatRoomController extends Controller
         User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
         return redirect()->back();
     }
-
     public function addMember(Request $request)
     {
         $findUser = User::where('name', $request->name)->get();
@@ -44,7 +41,6 @@ class ChatRoomController extends Controller
         }
         return redirect()->route('set-chat-room');
     }
-
     function setChatRoom(Request $request)
     {
         $rooms = Room::select('user_rooms.*', 'rooms.name')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->get();
@@ -56,7 +52,6 @@ class ChatRoomController extends Controller
         Message::create($message);
         return $message;
     }
-
     function getChat(Request $request)
     {
         $chat = Message::select('messages.*', 'users.name as sender')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();

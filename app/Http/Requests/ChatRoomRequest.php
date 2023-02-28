@@ -25,11 +25,7 @@ class ChatRoomRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required',
+            'name'=>'required|min:5',
         ];
-    }
-
-    public function messages(){
-        return ['name' => 'Room Name Required'];
     }
 }

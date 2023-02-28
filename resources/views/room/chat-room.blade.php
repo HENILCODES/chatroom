@@ -29,6 +29,11 @@
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     </div>
+                    @error('name')
+                    <span class="text-danger">
+                        {{$message}}
+                    </span>
+                    @enderror
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -52,7 +57,6 @@
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user name', 'id' => 'join', 'required' => true]) }}
                         <input type="hidden" name="room_id" class="chat-room-id">
                     </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -192,7 +196,7 @@
                         <div class="msger-inputarea">
                             <button class="msger-option-btn shadow bi bi-link-45deg"></button>
                             {{ Form::token() }}
-                            {{ Form::text('name', '', ['class' => 'msger-input shadow', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
+                            {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
                             <button class="msger-send-btn shadow" id="send"><i
                                     class="bi bi-send-fill fs-6"></i></button>
                         </div>
