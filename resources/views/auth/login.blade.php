@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="infor">
-                    {{ Form::open(['route' => 'login', 'autocomplete' => 'off', 'method' => 'post']) }}
+                    {{ Form::open(['route' => 'login', 'autocomplete' => 'on', 'method' => 'post']) }}
                     {{ Form::token() }}
                     <div class="input_box">
                         {{ Form::label('email', 'email address', ['class' => 'TagIn']) }}

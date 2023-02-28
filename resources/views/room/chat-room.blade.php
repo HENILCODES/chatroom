@@ -49,8 +49,8 @@
                     {{ Form::open(['route' => 'addMember-room', 'autocomplete' => 'off']) }}
                     {{ Form::token() }}
                     <div class="mb-3">
-                        {{ Form::text('user_id', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user id', 'id' => 'create', 'required' => true]) }}
-                        <input type="hidden" name="room_id" id="add-member-form">
+                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user id', 'id' => 'create', 'required' => true]) }}
+                        <input type="hidden" name="room_id" class="chat-room-id">
                     </div>
                     </form>
                 </div>
@@ -124,22 +124,13 @@
                                                 <div class="left"><i class="bi bi-check2"></i><span
                                                         class="lig-color Prchat">Hello</span></div>
                                                 <div class="right"><i class="bi bi-chevron-down" id="chat_more_op">
-                                                        <ul class="list-group position-fixed shadow"
+                                                        {{-- <ul class="list-group position-fixed shadow"
                                                             id="option-room-block"
                                                             style="display:none;width:200px;margin-left: -185px;">
                                                             <div class="nav-link">
-                                                                <form action="{{ route('delete-room') }}"
-                                                                    method="POST">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <input type="hidden" name="room_id"
-                                                                        value="{{ $room->room_id }}">
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger w-100">Delete
-                                                                        Group</button>
-                                                                </form>
+                                                                
                                                             </div>
-                                                        </ul>
+                                                        </ul> --}}
                                                     </i>
                                                 </div>
                                             </div>
@@ -157,9 +148,11 @@
                 <div class="right-box">
                     <section class="msger" style="display: none;" id="right-chat-box">
                         <header class="msger-header">
-                            <div class="msger-header-title fs-4 fw-bold d-flex">
+                            <div class="msger-header-title d-flex">
                                 <div class="group-img"><img id="room-image"></div>
-                                <span class="ms-3" id="chat-room-name"></span> {{-- that id use for display room name --}}
+                                <span class="ms-3 fw-bold fs-4" id="chat-room-name"></span> {{-- that id use for display room name --}}
+                            {{-- <span class="text-muted" id="group-user-name">1,2</span> --}}
+
                             </div>
                             <div class="msger-header-options">
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
@@ -172,6 +165,24 @@
                                     <li class="nav-link">
                                         <button class="btn btn-light w-100 text-start" data-bs-toggle="modal"
                                             data-bs-target="#AddMember">Add Member</button>
+                                    </li>
+                                    <li class="nav-link">
+                                        <form action="{{ route('delete-room') }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <input type="hidden" name="room_id" class="chat-room-id" >
+                                            <button type="submit" class="btn btn-light text-start w-100">Delete
+                                                Group</button>
+                                        </form>
+                                    </li>
+                                    <li class="nav-link">
+                                        <form action="{{ route('logout-room') }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <input type="hidden" name="room_id" class="chat-room-id" >
+                                            <button type="submit" class="btn btn-light text-start w-100">logout
+                                                Group</button>
+                                        </form>
                                     </li>
                                 </ul>
                             </div>

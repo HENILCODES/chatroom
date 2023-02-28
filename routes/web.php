@@ -29,6 +29,7 @@ Route::middleware("auth")->group(function () {
     Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
     Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
     Route::delete('deleteRoom', [ChatRoomController::class, 'deleteRoom'])->name('delete-room');
+    Route::delete('logoutRoom', [ChatRoomController::class, 'logoutRoom'])->name('logout-room');
 });
 Auth::routes();
 Route::get('/test', function () {

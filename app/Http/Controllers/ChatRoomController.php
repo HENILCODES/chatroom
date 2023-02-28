@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChatRoomRequest;
 use App\Models\Message;
 use App\Models\Room;
+use App\Models\User;
 use App\Models\User_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,13 +24,24 @@ class ChatRoomController extends Controller
     {
         User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
         Room::find($request->room_id)->delete();
+        
+        return redirect()->back();
+    }
+    public function logoutRoom(Request $request)
+    {
+        User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
         return redirect()->back();
     }
 
     public function addMember(Request $request)
     {
-        $users_rooms = array('user_id' => $request->user_id, 'room_id' => $request->room_id, 'type' => 'member');
-        User_room::create($users_rooms);
+        $findUser = User::where('name', $request->name)->get();
+        if ($findUser->count() == 1) {
+            $users_rooms = array('user_id' => $findUser[0]->id, 'room_id' => $request->room_id, 'type' => 'member');
+            User_room::create($users_rooms);
+        } else {
+            dd("User Not Found");
+        }
         return redirect()->route('set-chat-room');
     }
 
