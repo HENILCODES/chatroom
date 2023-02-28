@@ -18,7 +18,7 @@ class CheckUser
     public function handle(Request $request, Closure $next)
     {
         if ($request->name === Auth::user()->name) {
-            dd("Alredy Added",$request->all());
+            dd("Alredy Added");
         }
         return $next($request);
     }

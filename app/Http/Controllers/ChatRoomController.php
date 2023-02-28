@@ -14,27 +14,29 @@ class ChatRoomController extends Controller
 {
     public function createRoom(ChatRoomRequest $request)
     {
-        $room = Room::create($request->all());
-        $users_rooms = array('user_id' => $room->user_id, 'room_id' => $room->id, 'type' => 'admin');
+        $room = $request->all();
+        $room['user_name'] = Auth::user()->name;
+        $room = Room::create($room);
+        $users_rooms = array('user_name' => $room['user_name'], 'room_id' => $room->id, 'type' => 'admin');
         User_room::create($users_rooms);
         return redirect()->route('set-chat-room');
     }
     public function deleteRoom(Request $request)
     {
-        User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
+        User_room::where('user_name', Auth::user()->name)->where('room_id', $request->room_id)->delete();
         Room::find($request->room_id)->delete();
         return redirect()->back();
     }
     public function logoutRoom(Request $request)
     {
-        User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
+        User_room::where('user_name', Auth::user()->name)->where('room_id', $request->room_id)->delete();
         return redirect()->back();
     }
     public function addMember(Request $request)
     {
         $findUser = User::where('name', $request->name)->get();
         if ($findUser->count() == 1) {
-            $users_rooms = array('user_id' => $findUser[0]->id, 'room_id' => $request->room_id, 'type' => 'member');
+            $users_rooms = array('user_name' => $request->name, 'room_id' => $request->room_id);
             User_room::create($users_rooms);
         } else {
             dd("User Not Found");
@@ -54,7 +56,7 @@ class ChatRoomController extends Controller
     }
     function getChat(Request $request)
     {
-        $chat = Message::select('messages.*', 'users.name as sender')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
+        $chat = Message::select('messages.*')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
         return $chat;
     }
 }

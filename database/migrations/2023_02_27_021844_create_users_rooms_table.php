@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_rooms', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id')->autoIncrement();
             $table->integer('room_id')->index();
-            $table->integer('user_id')->index();
-            $table->enum('type', ['admin', 'member']);
+            $table->string('user_name')->index();
+            $table->enum('type', ['admin', 'member'])->default('member');
             $table->timestamps();
         });
     }

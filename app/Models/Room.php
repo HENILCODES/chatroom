@@ -9,8 +9,8 @@ class Room extends Model
 {
     use HasFactory;
     public $fillable = [
-        'name',
         'id',
-        'user_id',
+        'name',
+        'user_name',
     ];
 }

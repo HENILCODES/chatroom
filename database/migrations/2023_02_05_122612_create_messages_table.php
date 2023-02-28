@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->text('chat');
             $table->bigInteger('room_id')->index();
-            $table->integer('user_id')->index();
+            $table->string('user_name')->index();
             $table->timestamps();
         });
     }

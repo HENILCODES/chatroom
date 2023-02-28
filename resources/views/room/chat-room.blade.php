@@ -27,12 +27,12 @@
                     {{ Form::token() }}
                     <div class="mb-3">
                         {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
                     </div>
                     @error('name')
-                    <span class="text-danger">
-                        {{$message}}
-                    </span>
+                        <span class="text-danger">
+                            {{ $message }}
+                        </span>
                     @enderror
                 </div>
                 <div class="modal-footer">
@@ -77,9 +77,10 @@
                         <div class="Himg">
                             <div class="imgBox">
                                 {{-- <img src="{{ url('storage/henil.jpg') }}" alt="useer" class="c-pointer"> --}}
-                                {{ Auth::user()->name }}
+                                <span>{{ Auth::user()->name }}</span>
                             </div>
                         </div>
+                        <input type="hidden" id="active-user-name" value="{{ Auth::user()->name }}">
                         <div class="option d-flex">
                             <div class="option-icon p-r">
                                 <img src="{{ url('storage/status.png') }}" alt="Status" class="c-pointer">
@@ -109,9 +110,9 @@
                     </div>
                     <div class="user-friend">
                         {{-- $rooms in get user_rooms and room name value  --}}
-                        @forelse ($rooms as $room)
+                        @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
-                            @if ($room->user_id == Auth::user()->id)
+                            @if ($room->user_name === Auth::user()->name)
                                 <div class="block room-block" id="{{ $room->room_id }}"> {{-- use id value in script file in load message in chat room use room id --}}
                                     <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                         <div class="imgB">
@@ -142,9 +143,7 @@
                                     </div>
                                 </div>
                             @endif
-                        @empty
-                            <h1>Not Found</h1>
-                        @endforelse
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -155,7 +154,7 @@
                             <div class="msger-header-title d-flex">
                                 <div class="group-img"><img id="room-image"></div>
                                 <span class="ms-3 fw-bold fs-4" id="chat-room-name"></span> {{-- that id use for display room name --}}
-                            {{-- <span class="text-muted" id="group-user-name">1,2</span> --}}
+                                {{-- <span class="text-muted" id="group-user-name">1,2</span> --}}
 
                             </div>
                             <div class="msger-header-options">
@@ -174,7 +173,7 @@
                                         <form action="{{ route('delete-room') }}" method="POST">
                                             @method('delete')
                                             @csrf
-                                            <input type="hidden" name="room_id" class="chat-room-id" >
+                                            <input type="hidden" name="room_id" class="chat-room-id">
                                             <button type="submit" class="btn btn-light text-start w-100">Delete
                                                 Group</button>
                                         </form>
@@ -183,7 +182,7 @@
                                         <form action="{{ route('logout-room') }}" method="POST">
                                             @method('delete')
                                             @csrf
-                                            <input type="hidden" name="room_id" class="chat-room-id" >
+                                            <input type="hidden" name="room_id" class="chat-room-id">
                                             <button type="submit" class="btn btn-light text-start w-100">logout
                                                 Group</button>
                                         </form>
@@ -224,7 +223,7 @@
 
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
-        var user_id = {{ Auth::user()->id }}; //stroe session value in that virable for access script.js file
+        var user_name = $("#active-user-name").val(); //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>
