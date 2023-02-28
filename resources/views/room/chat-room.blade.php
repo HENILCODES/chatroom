@@ -49,7 +49,7 @@
                     {{ Form::open(['route' => 'addMember-room', 'autocomplete' => 'off']) }}
                     {{ Form::token() }}
                     <div class="mb-3">
-                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user id', 'id' => 'create', 'required' => true]) }}
+                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type user name', 'id' => 'join', 'required' => true]) }}
                         <input type="hidden" name="room_id" class="chat-room-id">
                     </div>
                     </form>
