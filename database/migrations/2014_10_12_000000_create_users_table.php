@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->string('name')->unique();
             $table->string('email')->unique();
+            $table->string('photo');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

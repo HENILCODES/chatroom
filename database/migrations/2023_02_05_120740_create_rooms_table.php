@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
             $table->string('name');
+            $table->string('photo');
             $table->string('user_name')->index();
             $table->timestamps();
         });

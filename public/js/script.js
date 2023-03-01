@@ -20,22 +20,25 @@ $(document).ready(function () {
         sendMessage(); //triggre function on click button send
     });
 
+    function getRoomDetails() {
+        alert("d");
+    }
     $(".room-block").click(function () {
         $("#right-default-box").hide();
         $("#right-chat-box").show(); //when click block show cht box
 
-        let room_name = $(this).children().attr("id"); //get room name in use id attributes
-        $("#chat-room-name").html(room_name); // set chat room name
+        let room_name = $(this).children(); //get room name in use id attributes
+        $("#chat-room-name").html(room_name.attr("id")); // set chat room name
 
         let room_id = $(this).attr("id"); //get room id use id attributes
         getMessage(room_id); // send group id to function and display message
+        $("#room-image").attr("src", 'storage/profile/'+room_name.children().attr("id")); //stroe group image
     });
 
     function getMessage(roomid) {
         $(".chat-room-id").val(roomid);
         // $("#get-room-id").val(roomid); //stroe value of room id for send message
         // $("#add-member-form").val(roomid); //stroe value of room id for add member in room
-        $("#room-image").attr("src", "http://127.0.0.1:8000/storage/henil.jpg"); //stroe group image
 
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",

@@ -25,7 +25,7 @@ class ChatRoomRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|min:1|max:20',
+            'name'=>'required|max:20',
         ];
     }
 }

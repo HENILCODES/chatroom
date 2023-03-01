@@ -16,6 +16,9 @@ class ChatRoomController extends Controller
     {
         if (Auth::user()->id) {
             $room = $request->all();
+            $file = $request->photo->getClientOriginalName();
+            $request->photo->move(public_path('storage/profile/'),$file);
+            $room['photo'] = $file;
             $room['user_name'] = Auth::user()->name;
             $room = Room::create($room);
             $users_rooms = array('user_name' => $room['user_name'], 'room_id' => $room->id, 'type' => 'admin');
@@ -48,7 +51,7 @@ class ChatRoomController extends Controller
     }
     function setAllRooms(Request $request)
     {
-        $rooms = Room::select('user_rooms.*', 'rooms.name')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->where('user_rooms.user_name', Auth::user()->name)->get();
+        $rooms = Room::select('user_rooms.*', 'rooms.name','rooms.photo')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->where('user_rooms.user_name', Auth::user()->name)->get();
         return view('room.chat-room', compact('rooms'));
     }
     function sendChat(Request $request)

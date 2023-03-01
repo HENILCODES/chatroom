@@ -54,6 +54,15 @@
                             <span class="bi bi-eye-fill" id="show_hide_password"></span>
                         </div>
                     </div>
+                    <div class="input_box">
+                        {{ Form::label('photo', 'profile photo', ['class' => 'TagIn']) }}
+                        {{ Form::file('photo', ['class' => 'input', 'placeholder' => 'type username', 'title' => 'Profile photo', 'required' => 'true']) }}
+                        @error('photo')
+                            <div class="error-msg">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @enderror
+                    </div>
                     {{ Form::submit('Sign Up', ['class' => 'Log_Button', 'id' => 'login']) }}
                     {{ Form::close() }}
                 </div>

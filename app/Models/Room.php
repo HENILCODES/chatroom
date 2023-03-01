@@ -12,6 +12,7 @@ class Room extends Model
         'id',
         'name',
         'user_name',
+        'photo',
     ];
     public function getCreatedAtAttribute($value)
     {
