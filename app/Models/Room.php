@@ -13,4 +13,8 @@ class Room extends Model
         'name',
         'user_name',
     ];
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d-M-Y h:i:s a', strtotime($value));
+    }
 }

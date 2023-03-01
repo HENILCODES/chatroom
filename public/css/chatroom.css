@@ -101,7 +101,9 @@
     margin-right: 10px;
     font-weight: bold;
 }
-
+.user-select-text{
+    user-select: text;
+}
 .msg-info-time {
     font-size: 0.85em;
 }

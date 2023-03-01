@@ -26,8 +26,7 @@
                     {{ Form::open(['route' => 'create-room', 'autocomplete' => 'off']) }}
                     {{ Form::token() }}
                     <div class="mb-3">
-                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2', 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
-                        {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
+                        {{ Form::text('name', '', ['class' => 'form-control fs-5 mt-2','maxlength'=>20, 'placeholder' => 'type hear', 'id' => 'create', 'required' => true]) }}
                     </div>
                     @error('name')
                         <span class="text-danger">
@@ -67,8 +66,6 @@
         </div>
     </div>
 
-
-
     <div id="root" class="containers">
         <div class="main-box">
             <div class="box">
@@ -77,10 +74,9 @@
                         <div class="Himg">
                             <div class="imgBox">
                                 {{-- <img src="{{ url('storage/henil.jpg') }}" alt="useer" class="c-pointer"> --}}
-                                <span>{{ Auth::user()->name }}</span>
+                                <span id="active-user-name">{{ Auth::user()->name }}</span> {{--user name access in script file--}}
                             </div>
                         </div>
-                        <input type="hidden" id="active-user-name" value="{{ Auth::user()->name }}">
                         <div class="option d-flex">
                             <div class="option-icon p-r">
                                 <img src="{{ url('storage/status.png') }}" alt="Status" class="c-pointer">
@@ -103,8 +99,7 @@
                     </header>
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
-                            <div class="icon"><i class="bi bi-search"></i></div><input class="input"
-                                placeholder="Search or start new chat" contenteditable="true">
+                            <div class="icon"><i class="bi bi-search"></i></div><input class="input" placeholder="Search or start new chat" contenteditable="true">
                         </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
@@ -112,7 +107,7 @@
                         {{-- $rooms in get user_rooms and room name value  --}}
                         @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
-                            @if ($room->user_name === Auth::user()->name)
+                            {{-- @if ($room->user_name === Auth::user()->name) --}}
                                 <div class="block room-block" id="{{ $room->room_id }}"> {{-- use id value in script file in load message in chat room use room id --}}
                                     <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                         <div class="imgB">
@@ -123,26 +118,19 @@
                                         <div class="friend-detail w-100">
                                             <div class="friend-name d-flex">
                                                 <div class="f-name"> <span>{{ $room->name }}</span></div>
-                                                <div class="f-active"> <span class="lig-color">9:30 am</span></div>
+                                                <div class="f-active"> <span class="lig-color">{{$room->created_at}}</span></div>
                                             </div>
                                             <div class="friend-last-chat d-flex">
                                                 <div class="left"><i class="bi bi-check2"></i><span
                                                         class="lig-color Prchat">Hello</span></div>
-                                                <div class="right"><i class="bi bi-chevron-down" id="chat_more_op">
-                                                        {{-- <ul class="list-group position-fixed shadow"
-                                                            id="option-room-block"
-                                                            style="display:none;width:200px;margin-left: -185px;">
-                                                            <div class="nav-link">
-                                                                
-                                                            </div>
-                                                        </ul> --}}
-                                                    </i>
+                                                <div class="right">
+                                                    <i class="bi bi-chevron-down" id="chat_more_op"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            {{-- @endif --}}
                         @endforeach
                     </div>
                 </div>
@@ -153,7 +141,7 @@
                         <header class="msger-header">
                             <div class="msger-header-title d-flex">
                                 <div class="group-img"><img id="room-image"></div>
-                                <span class="ms-3 fw-bold fs-4" id="chat-room-name"></span> {{-- that id use for display room name --}}
+                                <span class="ms-3 fw-bold fs-4 user-select-text" id="chat-room-name"></span> {{-- that id use for display room name --}}
                                 {{-- <span class="text-muted" id="group-user-name">1,2</span> --}}
 
                             </div>
@@ -195,7 +183,7 @@
                         <div class="msger-inputarea">
                             <button class="msger-option-btn shadow bi bi-link-45deg"></button>
                             {{ Form::token() }}
-                            {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chat', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
+                            {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chat','placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
                             <button class="msger-send-btn shadow" id="send"><i
                                     class="bi bi-send-fill fs-6"></i></button>
                         </div>
@@ -223,7 +211,7 @@
 
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
-        var user_name = $("#active-user-name").val(); //stroe session value in that virable for access script.js file
+        var user_name = $("#active-user-name").html(); //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

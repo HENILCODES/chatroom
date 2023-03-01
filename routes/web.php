@@ -25,7 +25,7 @@ Route::get('home', function () {
 Route::middleware("auth")->group(function () {
     Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
     Route::post('addmember', [ChatRoomController::class, 'addMember'])->name('addMember-room')->middleware('checkUser');
-    Route::get('/', [ChatRoomController::class, 'setChatRoom'])->name('set-chat-room');
+    Route::get('/', [ChatRoomController::class, 'setAllRooms'])->name('set-all-room');
     Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
     Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');
     Route::delete('deleteRoom', [ChatRoomController::class, 'deleteRoom'])->name('delete-room');
