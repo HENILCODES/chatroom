@@ -24,9 +24,12 @@ $(document).ready(function () {
         alert("d");
     }
     $(".room-block").click(function () {
+
         $("#right-default-box").hide();
         $("#right-chat-box").show(); //when click block show cht box
-
+        
+        $('.room-block').removeClass('active');
+        $(this).addClass('active');
         let room_name = $(this).data('room-name'); //get room name in use data attributes
         $("#chat-room-name").html(room_name); // set chat room name
 

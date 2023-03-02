@@ -131,7 +131,10 @@ body {
   cursor: pointer;
 }
 .main-box .user-friend .block:hover {
-  background-color: #f6f4f4;
+  background-color: #eeeaea;
+}
+.main-box .user-friend .active {
+  background-color: #eeeaea;
 }
 .main-box .user-friend .friend-block {
   align-items: center;

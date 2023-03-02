@@ -59,15 +59,19 @@ body {
             justify-content: flex-end;
             padding: 6px 15px;
             background-color: #f0f2f5;
+
             .option {
                 align-items: center;
+
                 .option-icon {
                     padding: 1px 5px;
                     opacity: 0.5;
                     font-size: 19px;
+
                     i {
                         cursor: pointer;
                     }
+
                     // .More_option{
                     //     padding: 9px 0;
                     //     background-color: #fff !important;
@@ -155,8 +159,11 @@ body {
             cursor: pointer;
 
             &:hover {
-                background-color: #f6f4f4;
+                background-color: #eeeaea;
             }
+        }
+        .active {
+            background-color: #eeeaea;
         }
 
         .friend-block {
@@ -253,6 +260,7 @@ body {
         }
     }
 }
+
 .lig-color {
     color: #505b62 !important;
 }
