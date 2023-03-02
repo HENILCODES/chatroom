@@ -27,18 +27,18 @@ $(document).ready(function () {
         $("#right-default-box").hide();
         $("#right-chat-box").show(); //when click block show cht box
 
-        let room_name = $(this).children(); //get room name in use id attributes
-        $("#chat-room-name").html(room_name.attr("id")); // set chat room name
+        let room_name = $(this).data('room-name'); //get room name in use data attributes
+        $("#chat-room-name").html(room_name); // set chat room name
 
-        let room_id = $(this).attr("id"); //get room id use id attributes
+        let room_id = $(this).data("room-id"); //get room id use data attributes
         getMessage(room_id); // send group id to function and display message
-        $("#room-image").attr("src", 'storage/profile/'+room_name.children().attr("id")); //stroe group image
+
+        let room_photo = $(this).data("room-photo"); //get room id use id attributes
+        $("#room-image").attr("src", 'storage/profile/'+room_photo); //stroe group image
     });
 
     function getMessage(roomid) {
-        $(".chat-room-id").val(roomid);
-        // $("#get-room-id").val(roomid); //stroe value of room id for send message
-        // $("#add-member-form").val(roomid); //stroe value of room id for add member in room
+        $(".chat-room-id").val(roomid); // store room id in input for add member
 
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",

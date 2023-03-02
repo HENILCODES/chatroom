@@ -110,9 +110,9 @@
                         @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
                             {{-- @if ($room->user_name === Auth::user()->name) --}}
-                            <div class="block room-block" id="{{ $room->room_id }}" > {{-- use id value in script file in load message in chat room use room id --}}
-                                <div class="friend-block d-flex" id="{{ $room->name }}"> {{-- its use for load room name in chat room when click room-block in script.js --}}
-                                    <div class="imgB" id="{{$room->photo}}">
+                            <div class="block room-block" data-room-id="{{ $room->room_id }}" data-room-name="{{ $room->name }}" data-room-photo="{{$room->photo}}"> {{-- use id value in script file in load message in chat room use room id --}}
+                                <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
+                                    <div class="imgB">
                                         <div class="friend-img"><img src="{{ url('storage/profile/' . $room->photo) }}" alt="{{ $room->photo }}">
                                         </div>
                                     </div>
