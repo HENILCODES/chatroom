@@ -86,12 +86,15 @@
 .msg-bubble {
     max-width: 450px;
     min-width: 270px;
-    padding: 15px;
+    padding: 10px;
     word-wrap: break-word;
     border-radius: 15px;
     background: var(--left-msg-bg);
 }
-
+.pre{
+    font-family: inherit;
+    padding-bottom: 8px;
+}
 .msg-info {
     display: flex;
     justify-content: space-between;
@@ -141,7 +144,10 @@
     border-radius: 3px;
     font-size: 1em;
 }
-
+#chatBotType{
+    background: #ddd;
+    border-radius: 20px;
+}
 .msger-input {
     flex: 1;
     background: #ddd;
@@ -159,7 +165,7 @@
 }
 .msger-send-btn {
     background: rgb(0, 196, 65);
-    margin-left: 10px;
+    margin-left: 5px;
     color: #fff;
     border-radius: 50px;
     cursor: pointer;

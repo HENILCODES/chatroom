@@ -224,7 +224,11 @@
                             <main class="msger-chat" id="msger-chat-bot">
                             </main>
                             <div class="msger-inputarea">
-                                {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chatbotText', 'placeholder' => 'hello .... ', 'autocomplete' => 'off']) }}
+                                <select name="" class="control-select" id="chatBotType">
+                                    <option value="search">/search</option>
+                                    <option value="image">/image</option>
+                                </select>
+                                {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chatbotText','autofocus'=>true ,'placeholder' => 'hello .... ', 'autocomplete' => 'off']) }}
                                 <button class="msger-send-btn shadow" id="chatbotSend"><i class="bi bi-send-fill fs-6"></i></button>
                             </div>
                             <script src="{{url('js/chatbot.js')}}"></script>
