@@ -1,3 +1,6 @@
+$("#room-default-block").click(function () {
+    $("#default-box").hide();
+});
 $("#chatbotText").on("keyup", function (element) {
     if (element.which == 13) {
         scrollBottom();
@@ -21,7 +24,7 @@ $("#chatbotSend").click(function () {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                     processData: false,
                     data: `{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"${chatbotText}"}],"temperature":0}`,
@@ -46,7 +49,7 @@ $("#chatbotSend").click(function () {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                     processData: false,
                     // data: `{"prompt":"A cute baby sea otter","n":2,"size":"1024x1024"}`,
@@ -54,7 +57,7 @@ $("#chatbotSend").click(function () {
                     success: function (response) {
                         scrollBottom();
                         $("#chatbotText").attr("readonly", false);
-                        let images =response["data"][0]["url"];
+                        let images = response["data"][0]["url"];
                         displayImages(images);
                     },
                     error: function (jqXhr, textStatus, errorMessage) {
@@ -71,7 +74,7 @@ function scrollBottom() {
 function displayImages(image) {
     $("#msger-chat-bot").append(
         `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
-        "></div> <div class="msg-bubble" style="max-width: 674px !important;"> <div class="msg-info"> <div class="msg-info-name user-select-text"> ChatBot </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> <img src="${image}" width="85%" ></div> </div> </div>`
+        "></div> <div class="msg-bubble" style="max-width: 674px !important;"> <div class="msg-info"> <div class="msg-info-name user-select-text"> ChatBot </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> <img src="${image}" width="82%" ></div> </div> </div>`
     );
 }
 function displayMessage(role, message) {
@@ -82,8 +85,8 @@ function displayMessage(role, message) {
             role === "assistant"
                 ? "background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
                 : "background-image: url('http://127.0.0.1:8000/storage/henil.jpg');"
-        }"></div> <div class="msg-bubble" style="max-width: 674px !important;"> <div class="msg-info"> <div class="msg-info-name user-select-text">
+        }"></div> <div class="msg-bubble"><div class="msg-info"><div class="msg-info-name user-select-text">
         ${role === "assistant" ? "ChatBot" : ""}
-        </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> <pre class='pre'> ${message} </pr></div> </div> </div>`
+        </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> ${message.trim()} </div> </div> </div>`
     );
 }

@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }}</title>
-    <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-    crossorigin="anonymous"></script>
+    <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/chatroom.css') }}">
@@ -106,7 +105,7 @@
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
                     <div class="user-friend">
-                        <div class="block back" id="room-default-block"> {{-- use id value in script file in load message in chat room use room id --}}
+                        <div class="block background" id="room-default-block"> {{-- use id value in script file in load message in chat room use room id --}}
                             <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                 <div class="imgB">
                                     <div class="friend-img"><img src="storage/profile/logo.png" >
@@ -132,7 +131,7 @@
                         @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
                             {{-- @if ($room->user_name === Auth::user()->name) --}}
-                            <div class="block room-block back" data-room-id="{{ $room->room_id }}" data-room-name="{{ $room->name }}" data-room-photo="{{$room->photo}}"> {{-- use id value in script file in load message in chat room use room id --}}
+                            <div class="block room-block background" data-room-id="{{ $room->room_id }}" data-room-name="{{ $room->name }}" data-room-photo="{{$room->photo}}"> {{-- use id value in script file in load message in chat room use room id --}}
                                 <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                     <div class="imgB">
                                         <div class="friend-img"><img src="{{ url('storage/profile/' . $room->photo) }}" alt="{{ $room->photo }}">
@@ -168,7 +167,6 @@
                                 <span class="ms-3 fw-bold fs-4 user-select-text" id="chat-room-name"></span>
                                 {{-- that id use for display room name --}}
                                 {{-- <span class="text-muted" id="group-user-name">1,2</span> --}}
-
                             </div>
                             <div class="msger-header-options">
                                 <span class="p-2" id="option-icon" style="cursor: pointer;">
@@ -213,7 +211,7 @@
                                     class="bi bi-send-fill fs-6"></i></button>
                         </div>
                     </section>
-                    <div class="right-box" id="right-default-box">
+                    <div class="right-box" style="display: none;" id="right-bot-box">
                         <section class="msger" >
                             <header class="msger-header">
                                 <div class="msger-header-title d-flex">
@@ -233,6 +231,21 @@
                             </div>
                             <script src="{{url('js/chatbot.js')}}"></script>
                         </section>
+                    </div>
+                    <div class="center-box center" id="default-box">
+                        <div class="icon-box">
+                            <img src="{{ url('storage/DefaultLogo.png') }}" alt="Logo" />
+                        </div>
+                        <div class="detail">
+                            <div class="head">
+                                <span class="title">WhatsApp Web</span>
+                            </div>
+                            <div class="data">
+                                Send and receive messages without keeping your
+                                phone online.<br />Use WhatsApp on up to 4 linked devices and 1 phone at the same
+                                time.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

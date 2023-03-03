@@ -2,18 +2,21 @@ $(document).ready(function () {
     // setInterval(() => {
     //     getMessage(8);
     // }, 1000);
-    $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
+    // $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
     // its use for toggle option
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
     });
     $("#room-default-block").click(function () {
-        $("#right-default-box").show();
+        $("#default-box").hide(); 
         $("#right-chat-box").hide(); 
-        $('.back').removeClass('active');
+        $("#right-bot-box").show(); 
+        
+        $('.background').removeClass('active');
         $(this).addClass('active');
     });
+    
     $("#action-user-option").click(function () {
         $("#option-user").slideToggle();
     });
@@ -30,13 +33,14 @@ $(document).ready(function () {
 
     $(".room-block").click(function () {
 
-        $("#right-default-box").hide();
+        $("#default-box").hide();
+        $("#right-bot-box").hide();
         $("#right-chat-box").show(); //when click block show cht box
         
         let room_id = $(this).data("room-id"); //get room id use data attributes
         getMessage(room_id); // room id pass in function and display message
 
-        $('.back').removeClass('active');
+        $('.background').removeClass('active');
         $(this).addClass('active');
         
         let room_name = $(this).data('room-name'); //get room name in use data attributes
