@@ -1,10 +1,12 @@
 $("#chatbotText").on("keyup", function (element) {
     if (element.which == 13) {
+        scrollBottom();
         $("#chatbotSend").click();
         $("#chatbotText").val("");
         $("#chatbotText").attr("readonly", true);
     }
 });
+
 $("#chatbotSend").click(function () {
     let chatbotText = $("#chatbotText").val();
     if (chatbotText.trim().length > 0) {
@@ -16,11 +18,12 @@ $("#chatbotSend").click(function () {
             headers: {
                 "Content-Type": "application/json",
                 Authorization:
-                    "Bearer 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",
+                    "Bearer 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",
             },
             processData: false,
             data: `{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"${chatbotText}"}],"temperature":0}`,
             success: function (response) {
+                scrollBottom();
                 $("#chatbotText").attr("readonly", false);
                 let role = response["choices"][0]["message"]["role"];
                 let message = response["choices"][0]["message"]["content"];
@@ -32,7 +35,10 @@ $("#chatbotSend").click(function () {
         });
     }
 });
-
+function scrollBottom(){
+    var $target = $("#msger-chat-bot");
+    $target.animate({ scrollTop: $target.height() * 5 }, 1000); //use for scroll chat room    
+}
 function displayMessage(role, message) {
     $("#msger-chat-bot").append(
         `<div class="msg ${
