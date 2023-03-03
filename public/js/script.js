@@ -1,10 +1,18 @@
 $(document).ready(function () {
-    //     var user_name = document.getElementById("#active-user-name").value; //stroe session value in that virable for access script.js file
+    // setInterval(() => {
+    //     getMessage(8);
+    // }, 1000);
     $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
     // its use for toggle option
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
+    });
+    $("#room-default-block").click(function () {
+        $("#right-default-box").show();
+        $("#right-chat-box").hide(); 
+        $('.back').removeClass('active');
+        $(this).addClass('active');
     });
     $("#action-user-option").click(function () {
         $("#option-user").slideToggle();
@@ -20,24 +28,23 @@ $(document).ready(function () {
         sendMessage(); //triggre function on click button send
     });
 
-    function getRoomDetails() {
-        alert("d");
-    }
     $(".room-block").click(function () {
 
         $("#right-default-box").hide();
         $("#right-chat-box").show(); //when click block show cht box
         
-        $('.room-block').removeClass('active');
+        let room_id = $(this).data("room-id"); //get room id use data attributes
+        getMessage(room_id); // room id pass in function and display message
+
+        $('.back').removeClass('active');
         $(this).addClass('active');
+        
         let room_name = $(this).data('room-name'); //get room name in use data attributes
         $("#chat-room-name").html(room_name); // set chat room name
 
-        let room_id = $(this).data("room-id"); //get room id use data attributes
-        getMessage(room_id); // send group id to function and display message
-
         let room_photo = $(this).data("room-photo"); //get room id use id attributes
         $("#room-image").attr("src", 'storage/profile/'+room_photo); //stroe group image
+
     });
 
     function getMessage(roomid) {

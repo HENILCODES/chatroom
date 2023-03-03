@@ -80,7 +80,9 @@
     background-size: cover;
     border-radius: 50%;
 }
-
+#chatbotText:read-only{
+    cursor: not-allowed;
+}
 .msg-bubble {
     max-width: 450px;
     min-width: 270px;
