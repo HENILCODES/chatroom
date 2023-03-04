@@ -220,11 +220,13 @@
                                 </div>
                             </header>
                             <main class="msger-chat" id="msger-chat-bot">
+                                <input type="hidden" value="{{env('OPENAI_API_KEY')}}" id="API_KEY">
                             </main>
                             <div class="msger-inputarea">
                                 <select name="" class="control-select" id="chatBotType">
                                     <option value="search">/search</option>
                                     <option value="image">/image</option>
+                                    <option value="mistakes">/spelling mistakes</option>
                                 </select>
                                 {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chatbotText','autofocus'=>true ,'placeholder' => 'hello .... ', 'autocomplete' => 'off']) }}
                                 <button class="msger-send-btn shadow" id="chatbotSend"><i class="bi bi-send-fill fs-6"></i></button>

@@ -176,6 +176,7 @@
     font-weight: 400;
     font-size: 1.1rem;
     padding-bottom: 5px;
+    white-space: pre-wrap;
 }
 .msger-chat {
     background-color: #fcfcfe;
