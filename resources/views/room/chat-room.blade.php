@@ -73,7 +73,7 @@
                     <header class="d-flex">
                         <div class="Himg">
                             <div class="imgBox">
-                                <img src="{{ url('storage/profile/Henil.jpeg') }}" alt="useer" class="c-pointer">
+                                <img src="{{ url('storage/profile/user/'.Auth::user()->photo) }}" alt="{{Auth::user()->photo}}" title="{{Auth::user()->name}}" class="c-pointer">
                             </div>
                         </div>
                         <div class="option d-flex">
@@ -107,7 +107,7 @@
                         <div class="block background" id="room-default-block"> {{-- use id value in script file in load message in chat room use room id --}}
                             <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                 <div class="imgB">
-                                    <div class="friend-img"><img src="storage/profile/logo.png" >
+                                    <div class="friend-img"><img src="storage/profile/room/logo.png" >
                                     </div>
                                 </div>
                                 <div class="friend-detail w-100">
@@ -133,7 +133,7 @@
                             <div class="block room-block background" data-room-id="{{ $room->room_id }}" data-room-name="{{ $room->name }}" data-room-photo="{{$room->photo}}"> {{-- use id value in script file in load message in chat room use room id --}}
                                 <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                     <div class="imgB">
-                                        <div class="friend-img"><img src="{{ url('storage/profile/' . $room->photo) }}" alt="{{ $room->photo }}">
+                                        <div class="friend-img"><img src="{{ url('storage/profile/room/' . $room->photo) }}" alt="{{ $room->photo }}">
                                         </div>
                                     </div>
                                     <div class="friend-detail w-100">
@@ -214,7 +214,7 @@
                         <section class="msger" >
                             <header class="msger-header">
                                 <div class="msger-header-title d-flex">
-                                    <div class="group-img"><img src="storage/profile/logo.png"></div>
+                                    <div class="group-img"><img src="storage/profile/room/logo.png"></div>
                                     <span class="ms-3 fw-bold fs-4 user-select-text"> ChatBot</span> <i class="bi bi-patch-check-fill fs-4 ms-2 text-primary"></i>
                                 </div>
                             </header>
@@ -252,10 +252,12 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="active-user-name" value="{{ Auth::user()->name }}"" /> {{-- user name access in script file --}}
+    <input type="hidden" id="active-user-id" value="{{ Auth::user()->id }}"" /> {{-- user name access in script file --}}
+    <input type="hidden" id="active-user-photo" value="{{ Auth::user()->photo }}"" /> {{-- user name access in script file --}}
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
-        var user_name = $("#active-user-name").val(); //stroe session value in that virable for access script.js file
+        var user_id = $("#active-user-id").val(); //stroe session value in that virable for access script.js file
+        var user_photo = $("#active-user-photo").val(); //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

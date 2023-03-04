@@ -12,7 +12,7 @@ class Message extends Model
         'id',
         'chat',
         'room_id',
-        'user_name',
+        'user_id',
     ];
 
     public function getCreatedAtAttribute($value)

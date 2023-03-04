@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_rooms', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
             $table->integer('room_id')->index();
-            $table->string('user_name')->index();
+            $table->string('user_id')->index();
             $table->enum('type', ['admin', 'member'])->default('member');
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ class Room extends Model
     public $fillable = [
         'id',
         'name',
-        'user_name',
+        'user_id',
         'photo',
     ];
     public function getCreatedAtAttribute($value)

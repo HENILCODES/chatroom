@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->string('name');
             $table->string('photo');
-            $table->string('user_name')->index();
+            $table->string('user_id')->index();
             $table->timestamps();
         });
     }

@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:18', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'photo' => ['required'],
+            'photo' => ['required','mimes:jpeg,png,jpg,ico'],
         ]);
     }
 
@@ -65,15 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $file = $data['photo'];
-        // $file->move('/', $data['photo']);
-        // dd($data['photo']);
+        $file = $data['photo']->getClientOriginalName();
+        $data['photo']->move('storage/profile/user/', $file);
 
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'photo' => $data['photo'],
+            'photo' => $file,
         ]);
     }
 }

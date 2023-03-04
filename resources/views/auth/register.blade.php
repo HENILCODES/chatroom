@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="infor">
-                    {{ Form::open(['route' => 'register', 'autocomplete' => 'off', 'method' => 'post']) }}
+                    {{ Form::open(['route' => 'register', 'autocomplete' => 'off', 'method' => 'post','files'=>true]) }}
                     {{ Form::token() }}
                     <div class="input_box">
                         {{ Form::label('name', 'User Name', ['class' => 'TagIn']) }}
@@ -56,7 +56,7 @@
                     </div>
                     <div class="input_box">
                         {{ Form::label('photo', 'profile photo', ['class' => 'TagIn']) }}
-                        {{ Form::file('photo', ['class' => 'input', 'placeholder' => 'type username', 'title' => 'Profile photo', 'required' => 'true']) }}
+                        {{ Form::file('photo', ['class' => 'input', 'placeholder' => 'type username','accept'=>'image/*', 'title' => 'Profile photo', 'required' => 'true']) }}
                         @error('photo')
                             <div class="error-msg">
                                 <strong>{{ $message }}</strong>

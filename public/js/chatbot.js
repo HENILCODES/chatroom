@@ -94,18 +94,18 @@ function readonlyInput(value) {
 }
 function scrollBottom() {
     var $target = $("#msger-chat-bot");
-    $target.animate({ scrollTop: $target.height() * 5 }, 1000); //use for scroll chat room
+    $target.animate({ scrollTop: $target.height() * 7 }, 1000); //use for scroll chat room
 }
 function displayImages(image) {
     $("#msger-chat-bot").append(
-        `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
+        `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/room/logo.png');"
         "></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text"> ChatBot </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> <img src="${image}" width="82%" ></div> </div> </div>`
     );
 }
 function errorMessageDisplay(message) {
     readonlyInput(false);
     $("#msger-chat-bot").append(
-        `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
+        `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/room/logo.png');"
         "></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text"> ChatBot </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text text-danger fw-bold">${message} </div> </div> </div>`
     );
 }
@@ -115,8 +115,8 @@ function displayMessage(role, message) {
             role === "assistant" ? "left-msg" : "right-msg" //check user name equal to session name
         }"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px; ${
             role === "assistant"
-                ? "background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
-                : "background-image: url('http://127.0.0.1:8000/storage/profile/Henil.jpeg');"
+                ? "background-image: url('http://127.0.0.1:8000/storage/profile/room/logo.png');"
+                : `background-image: url('http://127.0.0.1:8000/storage/profile/user/${user_photo}');`
         }"></div> <div class="msg-bubble"><div class="msg-info"><div class="msg-info-name user-select-text">
         ${role === "assistant" ? "ChatBot" : ""}
         </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> ${message.trim()} </div> </div> </div>`
