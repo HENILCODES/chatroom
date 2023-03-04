@@ -79,7 +79,7 @@ $(document).ready(function () {
                         ? "right-msg"
                         : "left-msg" //check user name equal to session name
                 }"> 
-                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/henil.jpg');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
+                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/Henil.jpeg');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
                 ${
                     element["user_name"] === user_name
                         ? ""

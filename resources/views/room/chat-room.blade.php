@@ -73,8 +73,7 @@
                     <header class="d-flex">
                         <div class="Himg">
                             <div class="imgBox">
-                                {{-- <img src="{{ url('storage/henil.jpg') }}" alt="useer" class="c-pointer"> --}}
-                                <span id="active-user-name">{{ Auth::user()->name }}</span> {{-- user name access in script file --}}
+                                <img src="{{ url('storage/profile/Henil.jpeg') }}" alt="useer" class="c-pointer">
                             </div>
                         </div>
                         <div class="option d-flex">
@@ -101,7 +100,7 @@
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
                                 placeholder="Search or start new chat" contenteditable="true">
-                        </div>
+                            </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
                     <div class="user-friend">
@@ -154,7 +153,7 @@
                                 </div>
                             </div>
                             {{-- @endif --}}
-                        @endforeach
+                            @endforeach
                     </div>
                 </div>
             </div>
@@ -179,7 +178,7 @@
                                     <li class="nav-link">
                                         <button class="btn btn-light w-100 text-start" data-bs-toggle="modal"
                                             data-bs-target="#AddMember">Add Member</button>
-                                    </li>
+                                        </li>
                                     <li class="nav-link">
                                         <form action="{{ route('delete-room') }}" method="POST">
                                             @method('delete')
@@ -253,10 +252,10 @@
             </div>
         </div>
     </div>
-
+    <input type="hidden" id="active-user-name" value="{{ Auth::user()->name }}"" /> {{-- user name access in script file --}}
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
-        var user_name = $("#active-user-name").html(); //stroe session value in that virable for access script.js file
+        var user_name = $("#active-user-name").val(); //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
     <script src="/js/script.js"></script>

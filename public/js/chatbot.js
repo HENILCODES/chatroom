@@ -116,7 +116,7 @@ function displayMessage(role, message) {
         }"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px; ${
             role === "assistant"
                 ? "background-image: url('http://127.0.0.1:8000/storage/profile/logo.png');"
-                : "background-image: url('http://127.0.0.1:8000/storage/henil.jpg');"
+                : "background-image: url('http://127.0.0.1:8000/storage/profile/Henil.jpeg');"
         }"></div> <div class="msg-bubble"><div class="msg-info"><div class="msg-info-name user-select-text">
         ${role === "assistant" ? "ChatBot" : ""}
         </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> ${message.trim()} </div> </div> </div>`
