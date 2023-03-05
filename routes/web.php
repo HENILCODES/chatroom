@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ChatRoomController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -25,7 +24,7 @@ Route::get('home', function () {
 
 Route::middleware("auth")->group(function () {
     Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
-    Route::post('addmember', [ChatRoomController::class, 'addMember'])->name('addMember-room')->middleware('checkUser');
+    Route::post('addmember', [ChatRoomController::class, 'addMember'])->name('addMember-room');
     Route::get('/', [ChatRoomController::class, 'setAllRooms'])->name('set-all-room');
     Route::post('send', [ChatRoomController::class, 'sendChat'])->name('send-chat');
     Route::post('get', [ChatRoomController::class, 'getChat'])->name('get-chat');

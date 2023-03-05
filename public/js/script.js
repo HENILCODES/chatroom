@@ -37,6 +37,8 @@ $(document).ready(function () {
         $("#right-chat-box").show(); //when click block show cht box
 
         let room_id = $(this).data("room-id"); //get room id use data attributes
+        $(".chat-room-id").val(room_id); // store room id in input for add member
+
         getMessage(room_id); // room id pass in function and display message
 
         $(".background").removeClass("active");
@@ -50,7 +52,6 @@ $(document).ready(function () {
     });
 
     function getMessage(roomid) {
-        $(".chat-room-id").val(roomid); // store room id in input for add member
 
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",
@@ -60,6 +61,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 var $target = $("#msger-chat");
+                console.log(data);
                 $target.animate({ scrollTop: $target.height() * 7 }, 1000); //use for scroll chat room
                 $("#msger-chat").empty(); // befor load message clear div and load again
                 displayMessage(data); // load all message

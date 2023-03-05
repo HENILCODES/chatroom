@@ -235,16 +235,14 @@
                     </div>
                     <div class="center-box center" id="default-box">
                         <div class="icon-box">
-                            <img src="{{ url('storage/DefaultLogo.png') }}" alt="Logo" />
+                            <img src="{{ url('storage/logo.png') }}" alt="Logo" style="opacity: 0.5" />
                         </div>
                         <div class="detail">
                             <div class="head">
-                                <span class="title">WhatsApp Web</span>
+                                <span class="title">Chat Room</span>
                             </div>
                             <div class="data">
-                                Send and receive messages without keeping your
-                                phone online.<br />Use WhatsApp on up to 4 linked devices and 1 phone at the same
-                                time.
+                               @2022 <a href="https://henil.rf.gd" class="text-muted ">Henil Code</a>
                             </div>
                         </div>
                     </div>

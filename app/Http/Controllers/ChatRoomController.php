@@ -17,7 +17,7 @@ class ChatRoomController extends Controller
         if (Auth::user()->id) {
             $room = $request->all();
             $file = $request->photo->getClientOriginalName();
-            $request->photo->move(public_path('storage/profile/room/'),$file);
+            $request->photo->move(public_path('storage/profile/room/'), $file);
             $room['photo'] = $file;
             $room['user_id'] = Auth::user()->id;
             $room = Room::create($room);
@@ -40,19 +40,22 @@ class ChatRoomController extends Controller
     public function addMember(Request $request)
     {
         $findUser = User::where('name', $request->name)->get();
-        // dd($findUser);
         if ($findUser->count() == 1) {
-            $users_rooms = array('user_id' => $findUser[0]->id, 'room_id' => $request->room_id);
-            User_room::create($users_rooms);
-            dd("Add");
-            return redirect()->route('set-all-room');
+            $CheckRoom = User_room::where('user_id', $findUser[0]->id)->where('room_id', $request->room_id)->first();
+            if (empty($CheckRoom)) {
+                $users_room = array('user_id' => $findUser[0]->id, 'room_id' => $request->room_id);
+                User_room::create($users_room);
+                return redirect()->route('set-all-room');
+            } else {
+                return "<h1>Alredy Added</h1>";
+            }
         } else {
-            dd("User Not Found");
+            return "<h1> User Not Found</h1>";
         }
     }
     function setAllRooms(Request $request)
     {
-        $rooms = Room::select('user_rooms.*', 'rooms.name','rooms.photo')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->where('user_rooms.user_id', Auth::user()->id)->get();
+        $rooms = Room::select('user_rooms.*', 'rooms.name', 'rooms.photo')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->where('user_rooms.user_id', Auth::user()->id)->get();
         return view('room.chat-room', compact('rooms'));
     }
     function sendChat(Request $request)
@@ -67,7 +70,7 @@ class ChatRoomController extends Controller
     function getChat(Request $request)
     {
         // $chat = Message::select('messages.*')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
-        $chat = Message::select('messages.*', 'users.photo','users.name as user_name')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
+        $chat = Message::select('messages.*', 'users.photo', 'users.name as user_name')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
 
         return $chat;
     }
