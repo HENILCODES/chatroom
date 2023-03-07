@@ -1,1 +1,0 @@
-{{ Form::tel($name, null, $attributes) }}

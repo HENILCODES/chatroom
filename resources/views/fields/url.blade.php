@@ -1,1 +1,0 @@
-{{Form::url($name,null,$attributes)}}

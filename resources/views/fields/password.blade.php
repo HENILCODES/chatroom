@@ -1,1 +1,0 @@
-{{ Form::password($name, $attributes) }}

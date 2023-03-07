@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ChatRoomController;
-use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -16,12 +15,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('home', function () {
     return view('welcome');
 });
-
-
 Route::middleware("auth")->group(function () {
     Route::post('createroom', [ChatRoomController::class, 'createRoom'])->name('create-room');
     Route::post('addmember', [ChatRoomController::class, 'addMember'])->name('addMember-room');
@@ -32,4 +28,3 @@ Route::middleware("auth")->group(function () {
     Route::delete('logoutRoom', [ChatRoomController::class, 'logoutRoom'])->name('logout-room');
 });
 Auth::routes();
-Route::resource("student", StudentController::class);
