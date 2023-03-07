@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChatRoomRequest;
 use App\Models\Message;
 use App\Models\Room;
 use App\Models\User;
@@ -10,10 +9,13 @@ use App\Models\User_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ChatRoomController extends Controller
+class RoomController extends Controller
 {
-    public function createRoom(ChatRoomRequest $request)
+    public function createRoom(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:20',
+        ]);
         if (Auth::user()->id) {
             $room = $request->all();
             $file = $request->photo->getClientOriginalName();
@@ -56,7 +58,7 @@ class ChatRoomController extends Controller
     function setAllRooms(Request $request)
     {
         $rooms = Room::select('user_rooms.*', 'rooms.name', 'rooms.photo')->join('user_rooms', 'user_rooms.room_id', '=', 'rooms.id')->where('user_rooms.user_id', Auth::user()->id)->get();
-        return view('room.chat-room', compact('rooms'));
+        return view('home', compact('rooms'));
     }
     function sendChat(Request $request)
     {

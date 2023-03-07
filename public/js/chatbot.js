@@ -33,7 +33,8 @@ $("#chatbotSend").click(function () {
                     success: function (response) {
                         scrollBottom();
                         let role = response["choices"][0]["message"]["role"];
-                        let message = response["choices"][0]["message"]["content"];
+                        let message =
+                            response["choices"][0]["message"]["content"];
                         displayMessage(role, message);
                         readonlyInput(false);
                     },
