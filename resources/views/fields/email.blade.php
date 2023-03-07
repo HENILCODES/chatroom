@@ -1,1 +1,1 @@
-{{ Form::email($name, $value, $attributes) }}
+{{ Form::email($name, null, $attributes) }}

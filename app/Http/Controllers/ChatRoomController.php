@@ -28,7 +28,7 @@ class ChatRoomController extends Controller
     }
     public function deleteRoom(Request $request)
     {
-        User_room::where('user_id', Auth::user()->id)->where('room_id', $request->room_id)->delete();
+        User_room::where('room_id', $request->room_id)->delete();
         Room::find($request->room_id)->delete();
         return redirect()->back();
     }
@@ -60,7 +60,6 @@ class ChatRoomController extends Controller
     }
     function sendChat(Request $request)
     {
-        // $findUser = User::where('name', $request->user_name)->get();
         if (Auth::user()->id == $request->user_id) {
             $message = $request->all();
             Message::create($message);
@@ -69,9 +68,7 @@ class ChatRoomController extends Controller
     }
     function getChat(Request $request)
     {
-        // $chat = Message::select('messages.*')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
         $chat = Message::select('messages.*', 'users.photo', 'users.name as user_name')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
-
         return $chat;
     }
 }

@@ -1,3 +1,3 @@
 <div class="col-1">
-    {{ Form::checkbox($name,$value,$checked, $attributes) }}
+    {{ Form::checkbox($name, $value, null, $attributes) }}
 </div>

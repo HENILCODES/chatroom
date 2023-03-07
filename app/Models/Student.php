@@ -26,7 +26,8 @@ class Student extends Model
         'url',
         'photo',
     ];
-    function getNameAttribute($value){
+    function getHobbyAttribute($value){
+        $value = explode(',',$value);
         return $value;
     }
 }

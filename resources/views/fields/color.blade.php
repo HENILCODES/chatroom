@@ -1,1 +1,1 @@
-{{ Form::color($name, $value, $attributes) }}
+{{ Form::color($name, null, $attributes) }}

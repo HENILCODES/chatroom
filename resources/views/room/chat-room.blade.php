@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }}</title>
-    <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="{{ url('js/jquery-3.6.3.js') }}" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/chatroom.css') }}">
@@ -73,7 +74,9 @@
                     <header class="d-flex">
                         <div class="Himg">
                             <div class="imgBox">
-                                <img src="{{ url('storage/profile/user/'.Auth::user()->photo) }}" alt="{{Auth::user()->photo}}" title="{{Auth::user()->name}}" class="c-pointer">
+                                <img src="{{ url('storage/profile/user/' . Auth::user()->photo) }}"
+                                    alt="{{ Auth::user()->photo }}" title="{{ Auth::user()->name }}"
+                                    class="c-pointer">
                             </div>
                         </div>
                         <div class="option d-flex">
@@ -100,21 +103,22 @@
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
                                 placeholder="Search or start new chat" contenteditable="true">
-                            </div>
+                        </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
                     <div class="user-friend">
                         <div class="block background" id="room-default-block"> {{-- use id value in script file in load message in chat room use room id --}}
                             <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                 <div class="imgB">
-                                    <div class="friend-img"><img src="storage/profile/room/logo.png" >
+                                    <div class="friend-img"><img src="storage/profile/room/logo.png">
                                     </div>
                                 </div>
                                 <div class="friend-detail w-100">
                                     <div class="friend-name d-flex">
-                                        <div class="f-name"> <span class="fw-bold">ChatBot</span> <i class="bi bi-patch-check-fill fs-5 ms-2 text-primary"></i></div>
-                                        <div class="f-active"> <span
-                                                class="lig-color">02-Mar-2023 09:47:02 am</span></div>
+                                        <div class="f-name"> <span class="fw-bold">ChatBot</span> <i
+                                                class="bi bi-patch-check-fill fs-5 ms-2 text-primary"></i></div>
+                                        <div class="f-active"> <span class="lig-color">02-Mar-2023 09:47:02 am</span>
+                                        </div>
                                     </div>
                                     <div class="friend-last-chat d-flex">
                                         <div class="left"><i class="bi bi-check2"></i><span
@@ -130,10 +134,14 @@
                         @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
                             {{-- @if ($room->user_name === Auth::user()->name) --}}
-                            <div class="block room-block background" data-room-id="{{ $room->room_id }}" data-room-name="{{ $room->name }}" data-room-photo="{{$room->photo}}"> {{-- use id value in script file in load message in chat room use room id --}}
+                            <div class="block room-block background" data-room-id="{{ $room->room_id }}"
+                                data-room-name="{{ $room->name }}" data-room-photo="{{ $room->photo }}">
+                                {{-- use id value in script file in load message in chat room use room id --}}
                                 <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                     <div class="imgB">
-                                        <div class="friend-img"><img src="{{ url('storage/profile/room/' . $room->photo) }}" alt="{{ $room->photo }}">
+                                        <div class="friend-img"><img
+                                                src="{{ url('storage/profile/room/' . $room->photo) }}"
+                                                alt="{{ $room->photo }}">
                                         </div>
                                     </div>
                                     <div class="friend-detail w-100">
@@ -153,7 +161,7 @@
                                 </div>
                             </div>
                             {{-- @endif --}}
-                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -178,15 +186,6 @@
                                     <li class="nav-link">
                                         <button class="btn btn-light w-100 text-start" data-bs-toggle="modal"
                                             data-bs-target="#AddMember">Add Member</button>
-                                        </li>
-                                    <li class="nav-link">
-                                        <form action="{{ route('delete-room') }}" method="POST">
-                                            @method('delete')
-                                            @csrf
-                                            <input type="hidden" name="room_id" class="chat-room-id">
-                                            <button type="submit" class="btn btn-light text-start w-100">Delete
-                                                Group</button>
-                                        </form>
                                     </li>
                                     <li class="nav-link">
                                         <form action="{{ route('logout-room') }}" method="POST">
@@ -211,15 +210,16 @@
                         </div>
                     </section>
                     <div class="right-box" style="display: none;" id="right-bot-box">
-                        <section class="msger" >
+                        <section class="msger">
                             <header class="msger-header">
                                 <div class="msger-header-title d-flex">
                                     <div class="group-img"><img src="storage/profile/room/logo.png"></div>
-                                    <span class="ms-3 fw-bold fs-4 user-select-text"> ChatBot</span> <i class="bi bi-patch-check-fill fs-4 ms-2 text-primary"></i>
+                                    <span class="ms-3 fw-bold fs-4 user-select-text"> ChatBot</span> <i
+                                        class="bi bi-patch-check-fill fs-4 ms-2 text-primary"></i>
                                 </div>
                             </header>
                             <main class="msger-chat" id="msger-chat-bot">
-                                <input type="hidden" value="{{env('OPENAI_API_KEY')}}" id="API_KEY">
+                                <input type="hidden" value="{{ env('OPENAI_API_KEY') }}" id="API_KEY">
                             </main>
                             <div class="msger-inputarea">
                                 <select name="" class="control-select" id="chatBotType">
@@ -227,10 +227,11 @@
                                     <option value="image">/image</option>
                                     <option value="mistakes">/spelling</option>
                                 </select>
-                                {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chatbotText','autofocus'=>true ,'placeholder' => 'hello .... ', 'autocomplete' => 'off']) }}
-                                <button class="msger-send-btn shadow" id="chatbotSend"><i class="bi bi-send-fill fs-6"></i></button>
+                                {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chatbotText', 'autofocus' => true, 'placeholder' => 'hello .... ', 'autocomplete' => 'off']) }}
+                                <button class="msger-send-btn shadow" id="chatbotSend"><i
+                                        class="bi bi-send-fill fs-6"></i></button>
                             </div>
-                            <script src="{{url('js/chatbot.js')}}"></script>
+                            <script src="{{ url('js/chatbot.js') }}"></script>
                         </section>
                     </div>
                     <div class="center-box center" id="default-box">
@@ -242,7 +243,7 @@
                                 <span class="title">Chat Room</span>
                             </div>
                             <div class="data">
-                               @2022 <a href="https://henil.rf.gd" class="text-muted ">Henil Code</a>
+                                @2022 <a href="https://henil.rf.gd" class="text-muted ">Henil Code</a>
                             </div>
                         </div>
                     </div>

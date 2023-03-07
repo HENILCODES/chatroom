@@ -1,1 +1,1 @@
-{{ Form::date($name, $value, $attributes) }}
+{{ Form::date($name, null, $attributes) }}

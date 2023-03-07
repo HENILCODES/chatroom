@@ -19,73 +19,89 @@
             margin: auto;
         }
     </style>
-    <div class="p-1">
-        <div class="p-3 d-flex  mx-5">
-            <a class="ms-2 btn btn-success fs-4" href="{{ route('student.index') }}">back</a>
-            <div class="text-center w-100">
-                <h2>Student All Data</h2>
+
+    <div class="container" style="width: 600px">
+        <div class="my-2">
+            <div class="text-center">
+                <h1>Student Detail</h1>
+            </div>
+            <div class="text-start">
+                <a class="text-start btn btn-success bi bi-arrow-left-square fs-5"
+                    href="{{ route('student.index') }}">back</a>
             </div>
         </div>
-        <table class="table table-primary table-responsive table-bordered">
-            <thead class="table-borderless text-center table-dark">
-                <th>ID</th>
-                <th>Student Name</th>
-                <th>Student Email</th>
-                <th>Student Password </th>
-                <th>Contact</th>
-                <th>Semester</th>
-                <th>Hobby</th>
-                <th>Gender</th>
-                <th>Favorite Color</th>
-                <th>Intrest in coding</th>
-                <th>Date of Birth</th>
-                <th>Month</th>
-                <th>Website</th>
-                <th>Photo</th>
-                <th>Update</th>
-                <th>Create</th>
-                <th>Action</a>
-                </th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $student->id }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->email }}</td>
-                    <td>{{ Str::of($student->password)->mask('*', 5) }}</td>
-                    <td>{{ $student->contact }}</td>
-                    <td>{{ $student->semester }}</td>
-                    <td>{{ $student->hobby }}</td>
-                    <td>{{ $student->gender }}</td>
-                    <td>Birth
-                        <div class="Fav_color shadow-lg border border-dark rounded"
-                            style="background-color:{{ $student->color }};"></div>
-                    </td>
-                    <td>{{ $student->interest }}</td>
-                    <td>{{ $student->dob }}</td>
-                    <td>{{ $student->month }}</td>
-                    <td>{{ $student->url }}</td>
-                    <td> <img src="{{ url('storage/' . $student->photo) }}" width="100px"
-                            alt="{{ $student->photo }}">
-                    </td>
-                    <td>{{ $student->updated_at }}</td>
-                    <td>{{ $student->created_at }}</td>
-                    <td class="text-center">
-                        <form action="{{ route('student.destroy', ['student' => $student->id]) }}" class="d-flex" method="post">
-                            @method('delete')
-                            @csrf
-                            <div>
-                                <a href="{{ route('student.edit', ['student' => $student->id]) }}"
-                                    class="btn btn-warning">edit</a>
-                            </div>
-                            <div>
-
-                                <button type="submit" class="btn btn-danger">delete</button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
+        <table class="table table-light table-striped">
+            <tr>
+                <td class="ps-5 fw-bold">Name</td>
+                <td>{{ $student->name }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">Email</td>
+                <td>{{ $student->email }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">password</td>
+                <td>{{ $student->password }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">contact</td>
+                <td>{{ $student->contact }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">semester</td>
+                <td>{{ $student->semester }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">hobby</td>
+                <td>{{ implode(',',$student->hobby) }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">color</td>
+                <td>
+                    <div class="Fav_color shadow-lg border border-dark rounded"
+                        style="background-color:{{ $student->color }};"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">interset</td>
+                <td>{{ $student->interest }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">Dob</td>
+                <td>{{ $student->dob }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">month</td>
+                <td>{{ $student->month }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">website</td>
+                <td>{{ $student->url }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">photo</td>
+                <td><img src="{{ url('storage/' . $student->photo) }}" width="100px" alt="{{ $student->photo }}">
+                </td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">create</td>
+                <td>{{ $student->created_at }}</td>
+            </tr>
+            <tr>
+                <td class="ps-5 fw-bold">Update</td>
+                <td>{{ $student->updated_at }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="bg-light text-center">
+                    <form action="{{ route('student.destroy', ['student' => $student->id]) }}" method="post">
+                        <a href="{{ route('student.edit', ['student' => $student->id]) }}"
+                            class="btn btn-warning bi bi-pencil me-4">edir</a>
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger bi bi-trash">delete</button>
+                    </form>
+                </td>
+            </tr>
         </table>
     </div>
 </body>

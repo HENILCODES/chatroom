@@ -36,8 +36,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = $request->except(['_token']);
-        $student['hobby'] = implode(',', $student['hobby']);
+        $student = $request->all();
         $student['photo'] = $request->photo->getClientOriginalName();
         $request->photo->move('storage/', $student['photo']);
         Student::create($student);
@@ -79,7 +78,7 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $student = $request->except('_token');
+        $student = $request->all();
         $student['hobby'] = implode(',', $student['hobby']);
 
         if ($request->photo) {
