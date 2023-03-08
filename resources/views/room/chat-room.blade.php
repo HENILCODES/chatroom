@@ -30,7 +30,11 @@
             </ul>
         </div>
     </header>
-    <main class="msger-chat" id="msger-chat">
+    <main class="msger-chat" >
+        {{-- <h1>fd</h1> --}}
+        <div id="msger-chat">
+        </div>
+        <span id="scroll-bottom-chat"></span>
     </main>
     <div class="msger-inputarea">
         <button class="msger-option-btn shadow bi bi-link-45deg"></button>

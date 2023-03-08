@@ -11,8 +11,8 @@ class Message extends Model
     public $fillable = [
         'id',
         'chat',
-        'room_id',
-        'user_id',
+        'rooms_id',
+        'users_id',
     ];
 
     public function getCreatedAtAttribute($value)

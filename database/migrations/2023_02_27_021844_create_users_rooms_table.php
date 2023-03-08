@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_rooms', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->integer('room_id')->index();
-            $table->string('user_id')->index();
+            $table->foreignId('rooms_id')->references('id')->on('rooms');
+            $table->foreignId('users_id')->references('id')->on('users');
             $table->enum('type', ['admin', 'member'])->default('member');
             $table->timestamps();
         });

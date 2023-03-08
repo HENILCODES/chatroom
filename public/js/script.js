@@ -52,19 +52,16 @@ $(document).ready(function () {
     });
 
     function getMessage(roomid) {
-
         $.ajax("http://127.0.0.1:8000/get", {
             type: "POST",
             data: {
                 _token: token,
-                room_id: roomid,
+                rooms_id: roomid,
             },
             success: function (data) {
-                var $target = $("#msger-chat");
-                console.log(data);
-                $target.animate({ scrollTop: $target.height() * 7 }, 1000); //use for scroll chat room
                 $("#msger-chat").empty(); // befor load message clear div and load again
                 displayMessage(data); // load all message
+                document.getElementById("scroll-bottom-chat").scrollIntoView();
             },
             error: function (jqXhr, textStatus, errorMessage) {
                 console.log("Error" + errorMessage);
@@ -75,18 +72,12 @@ $(document).ready(function () {
         data.forEach((element) => {
             $("#msger-chat").append(
                 `<div class="msg ${
-                    element["user_id"] === user_id
-                        ? "right-msg"
-                        : "left-msg" //check user name equal to session name
+                    element["users_id"] == user_id ? "right-msg" : "left-msg" //check user name equal to session name
                 }"> 
                 <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/user/${
                     element["photo"]
                 }');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
-                ${
-                    element["user_id"] === user_id
-                        ? ""
-                        : element["user_name"]
-                }
+                ${element["users_id"] == user_id ? "" : element["user_name"]}
                 </div> <div class="msg-info-time user-select-text">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text user-select-text"> ${
@@ -104,11 +95,10 @@ $(document).ready(function () {
                 data: {
                     _token: token,
                     chat: chat,
-                    room_id: room_id,
-                    user_id: user_id,
+                    rooms_id: room_id,
+                    users_id: user_id,
                 },
                 success: function () {
-                    console.log(user_id);
                     getMessage(room_id);
                     $("#chat").val("");
                 },

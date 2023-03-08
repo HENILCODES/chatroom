@@ -82,7 +82,7 @@
                         {{-- $rooms in get user_rooms and room name value  --}}
                         @foreach ($rooms as $room)
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
-                            <div class="block room-block background" data-room-id="{{ $room->room_id }}"
+                            <div class="block room-block background" data-room-id="{{ $room->rooms_id }}"
                                 data-room-name="{{ $room->name }}" data-room-photo="{{ $room->photo }}">
                                 {{-- use id value in script file in load message in chat room use room id --}}
                                 <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
@@ -129,5 +129,5 @@
         var user_photo = $("#active-user-photo").val(); //stroe session value in that virable for access script.js file
     </script>
     <script src="{{ url('js/bootstrap.bundle.js') }}"></script>
-    <script defer="defer" src="/js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>

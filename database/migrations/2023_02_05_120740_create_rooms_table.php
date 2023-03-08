@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->bigInteger('id')->autoIncrement();
+            $table->id();
             $table->string('name');
             $table->string('photo');
-            $table->string('user_id')->index();
+            $table->foreignId('users_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
