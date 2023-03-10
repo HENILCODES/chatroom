@@ -21,5 +21,5 @@
         <span>&copy; 2022 <a href="/"> Henil Code</a> </span>
     </div>
 </body>
-<script src="{{url('js/auth.js')}}"></script>
+<script defer="defer" src="{{url('js/auth.js')}}"></script>
 </html>

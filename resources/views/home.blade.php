@@ -39,7 +39,7 @@
                         <ul class="list-group position-fixed shadow mt-5" id="option-user"
                             style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
                             <button type="button" class="btn btn-light text-start" data-bs-toggle="modal"
-                                data-bs-target="#CreateRoom">Create Group </button>
+                            data-bs-target="#CreateRoom">Create Group </button>
                             <div class="nav-link">
                                 {{ Form::open(['route' => 'logout']) }}
                                 {{ Form::token() }}
@@ -51,7 +51,7 @@
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
-                                placeholder="Search or start new chat" contenteditable="true">
+                            placeholder="Search or start new chat" contenteditable="true">
                         </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
@@ -81,26 +81,27 @@
                         </div>
                         {{-- $rooms in get user_rooms and room name value  --}}
                         @foreach ($rooms as $room)
+                            {{-- @dump($room) --}}
                             {{-- it's check user id in user_rooms table with session user id if it equal than print group name --}}
-                            <div class="block room-block background" data-room-id="{{ $room->rooms_id }}"
-                                data-room-name="{{ $room->name }}" data-room-photo="{{ $room->photo }}">
+                            <div class="block room-block background" data-room-id="{{ $room['id'] }}"
+                                data-room-name="{{ $room['name'] }}" data-room-photo="{{ $room['photo'] }}">
                                 {{-- use id value in script file in load message in chat room use room id --}}
                                 <div class="friend-block d-flex"> {{-- its use for load room name in chat room when click room-block in script.js --}}
                                     <div class="imgB">
                                         <div class="friend-img"><img
-                                                src="{{ url('storage/profile/room/' . $room->photo) }}"
-                                                alt="{{ $room->photo }}">
+                                                src="{{ url('storage/profile/room/' . $room['photo']) }}"
+                                                alt="{{ $room['photo'] }}">
                                         </div>
                                     </div>
                                     <div class="friend-detail w-100">
                                         <div class="friend-name d-flex">
-                                            <div class="f-name"> <span>{{ $room->name }}</span></div>
+                                            <div class="f-name"> <span>{{ $room['name'] }}</span></div>
                                             <div class="f-active"> <span
-                                                    class="lig-color">{{ $room->created_at }}</span></div>
+                                                    class="lig-color">{{ $room['created_at'] }}</span></div>
                                         </div>
                                         <div class="friend-last-chat d-flex">
                                             <div class="left"><i class="bi bi-check2"></i><span
-                                                    class="lig-color Prchat">Hello</span></div>
+                                                class="lig-color Prchat">Hello</span></div>
                                             <div class="right">
                                                 <i class="bi bi-chevron-down" id="chat_more_op"></i>
                                             </div>
@@ -108,15 +109,15 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
                 </div>
             </div>
             <div class="w-100">
                 <div class="right-box">
                     @include('room.chat-room')
                     @include('room.bot-room')
-                    @include('room.default')
+                    <x-default-page name="{{env('APP_NAME')}}"/>
                 </div>
             </div>
         </div>

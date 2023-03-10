@@ -11,12 +11,13 @@ class Message extends Model
     public $fillable = [
         'id',
         'chat',
-        'rooms_id',
-        'users_id',
+        'room_id',
+        'user_id',
     ];
 
     public function getCreatedAtAttribute($value)
     {
         return date('d-M-Y h:i:s a', strtotime($value));
     }
+    
 }

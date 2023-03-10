@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Room extends Model
 {
@@ -12,7 +12,6 @@ class Room extends Model
     public $fillable = [
         'id',
         'name',
-        'users_id',
         'photo',
     ];
     protected $primaryKey ='id';
@@ -21,8 +20,8 @@ class Room extends Model
     {
         return date('d-M-Y h:i:s a', strtotime($value));
     }
-    public function user():BelongsTo
+    public function users():BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

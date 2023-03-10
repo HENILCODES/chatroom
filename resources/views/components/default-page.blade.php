@@ -4,7 +4,7 @@
     </div>
     <div class="detail">
         <div class="head">
-            <span class="title">Chat Room</span>
+            <span class="title">{{$name}}</span>
         </div>
         <div class="data">
             @2022 <a href="https://henil.rf.gd" class="text-muted ">Henil Code</a>

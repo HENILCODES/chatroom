@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
             $table->text('chat');
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
-            $table->foreignId('users_id')->references('id')->on('users');
+            $table->foreignId('room_id')->references('id')->on('rooms');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

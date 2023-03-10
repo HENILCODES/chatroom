@@ -4,7 +4,7 @@ var User_password = document.getElementById("confirmPassword");
 // password show hide
 ShowHide.addEventListener("click", function () {
     if (User_password.type == "password") {
-        User_password.type = "teUser_password_valuet";
+        User_password.type = "text";
         ShowHide.classList.remove("bi-eye-fill");
         ShowHide.classList.add("bi-eye-slash-fill");
     } else {
@@ -13,7 +13,6 @@ ShowHide.addEventListener("click", function () {
         ShowHide.classList.add("bi-eye-fill");
     }
 });
-
 // hide show icon
 User_password.addEventListener("keyup", function () {
     var User_password_value = document.getElementById("confirmPassword").value;

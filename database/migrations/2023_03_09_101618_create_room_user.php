@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_rooms', function (Blueprint $table) {
-            $table->bigInteger('id')->autoIncrement();
-            $table->foreignId('rooms_id')->references('id')->on('rooms');
-            $table->foreignId('users_id')->references('id')->on('users');
-            $table->enum('type', ['admin', 'member'])->default('member');
+        Schema::create('room_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('room_id')->references('id')->on('rooms');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_rooms');
+        Schema::dropIfExists('room_user');
     }
 };
