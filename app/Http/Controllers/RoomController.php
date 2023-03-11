@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
-    public function createRoom(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'name' => 'required|max:20',
@@ -22,25 +22,25 @@ class RoomController extends Controller
             $room['photo'] = $file;
             $details = Room::create($room);
 
-            // dump($details);
-            // $user = User::find(Auth::user()->id);
-            // dd($user->rooms->toArray());
+            $room = Room::find($details->id);
+            $room->users()->attach(Auth::user()->id, ['created_at' => now(), 'updated_at' => now()]);
 
-            // $users_rooms = array('user_id' => Auth::user()->id, 'room_id' => $room->id, 'type' => 'admin');
-            // User_room::create($users_rooms);
             return redirect()->route('set-all-room');
         }
     }
-    public function deleteRoom(Request $request)
+    public function delete(Request $request)
     {
         // User_room::where('rooms_id', $request->room_id)->delete();
         // Room::find($request->room_id)->delete();
         // return redirect()->back();
     }
-    public function logoutRoom(Request $request)
+    public function logout(Request $request)
     {
         // User_room::where('users_id', Auth::user()->id)->where('rooms_id', $request->room_id)->delete();
         // return redirect()->back();
+        $room = Room::find($request->room_id);
+        $room->users()->detach(Auth::user()->id);
+        return redirect()->back();
     }
     public function addMember(Request $request)
     {
@@ -58,23 +58,10 @@ class RoomController extends Controller
         //     return "<h1> User Not Found</h1>";
         // }
     }
-    function setAllRooms(Request $request)
+    function show(Request $request)
     {
         $user = User::find(Auth::user()->id);
         $rooms = $user->rooms->toArray();
         return view('home', compact('rooms'));
-    }
-    function sendChat(Request $request)
-    {
-        if (Auth::user()->id == $request->users_id) {
-            $message = $request->all();
-            Message::create($message);
-            return $message;
-        }
-    }
-    function getChat(Request $request)
-    {
-        $chat = Message::select('messages.*', 'users.photo', 'users.name as user_name')->join('users', 'users.id', '=', 'messages.users_id')->where('messages.rooms_id', $request->rooms_id)->orderBy('messages.id', 'asc')->get();
-        return $chat;
     }
 }

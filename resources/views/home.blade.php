@@ -122,8 +122,8 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="active-user-id" value="{{ Auth::user()->id }}"" /> {{-- user name access in script file --}}
-    <input type="hidden" id="active-user-photo" value="{{ Auth::user()->photo }}"" /> {{-- user name access in script file --}}
+    <input type="hidden" id="active-user-id" value="{{ Auth::user()->id }}" /> {{-- user name access in script file --}}
+    <input type="hidden" id="active-user-photo" value="{{ Auth::user()->photo }}" /> {{-- user name access in script file --}}
     <script>
         var token = $("input[name='_token']").val(); // use for send and get message using token value
         var user_id = $("#active-user-id").val(); //stroe session value in that virable for access script.js file

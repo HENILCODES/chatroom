@@ -53,10 +53,10 @@ $(document).ready(function () {
 
     function getMessage(roomid) {
         $.ajax("http://127.0.0.1:8000/get", {
-            type: "POST",
+            type: "get",
             data: {
                 _token: token,
-                rooms_id: roomid,
+                room_id: roomid,
             },
             success: function (data) {
                 $("#msger-chat").empty(); // befor load message clear div and load again
@@ -72,12 +72,10 @@ $(document).ready(function () {
         data.forEach((element) => {
             $("#msger-chat").append(
                 `<div class="msg ${
-                    element["users_id"] == user_id ? "right-msg" : "left-msg" //check user name equal to session name
+                    element["user_id"] == user_id ? "right-msg" : "left-msg" //check user name equal to session name
                 }"> 
-                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/user/${
-                    element["photo"]
-                }');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
-                ${element["users_id"] == user_id ? "" : element["user_name"]}
+                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/user/${user_photo}');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
+                ${element["user_id"] == user_id ? "" : element["user_id"]}
                 </div> <div class="msg-info-time user-select-text">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text user-select-text"> ${
@@ -95,8 +93,8 @@ $(document).ready(function () {
                 data: {
                     _token: token,
                     chat: chat,
-                    rooms_id: room_id,
-                    users_id: user_id,
+                    room_id: room_id,
+                    user_id: user_id,
                 },
                 success: function () {
                     getMessage(room_id);
