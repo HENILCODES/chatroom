@@ -18,45 +18,50 @@ class RoomController extends Controller
         if (Auth::user()->id) {
             $room = $request->all();
             $file = $request->photo->getClientOriginalName();
+
             $request->photo->move(public_path('storage/profile/room/'), $file);
             $room['photo'] = $file;
-            $details = Room::create($room);
+            $room['created_by'] = Auth::user()->id;
 
-            $room = Room::find($details->id);
+            $details = Room::create($room); //create new room recored
+
+            $room = Room::find($details->id); //add room_user recored 
             $room->users()->attach(Auth::user()->id, ['created_at' => now(), 'updated_at' => now()]);
-
             return redirect()->route('set-all-room');
         }
     }
     public function delete(Request $request)
     {
-        // User_room::where('rooms_id', $request->room_id)->delete();
-        // Room::find($request->room_id)->delete();
-        // return redirect()->back();
+        $room = Room::find($request->room_id);
+        $userId = array();
+        foreach ($room->users->toArray() as $user) {
+            array_push($userId,$user['id']);
+        }
+        $room->users()->detach($userId);
+        Message::where('room_id',$request->room_id)->delete();
+        $room->delete();
+        return redirect()->back();
     }
     public function logout(Request $request)
     {
-        // User_room::where('users_id', Auth::user()->id)->where('rooms_id', $request->room_id)->delete();
-        // return redirect()->back();
         $room = Room::find($request->room_id);
         $room->users()->detach(Auth::user()->id);
         return redirect()->back();
     }
     public function addMember(Request $request)
     {
-        // $findUser = User::where('name', $request->name)->get();
-        // if ($findUser->count() == 1) {
-        //     $CheckRoom = User_room::where('users_id', $findUser[0]->id)->where('rooms_id', $request->room_id)->first();
-        //     if (empty($CheckRoom)) {
-        //         $users_room = array('users_id' => $findUser[0]->id, 'rooms_id' => $request->room_id);
-        //         User_room::create($users_room);
-        //         return redirect()->route('set-all-room');
-        //     } else {
-        //         return "<h1>Alredy Added</h1>";
-        //     }
-        // } else {
-        //     return "<h1> User Not Found</h1>";
-        // }
+        $room = Room::find($request->room_id);   //find room details
+        if ($room->users->whereIn('name', $request->name)->count() < 1) {  //check room_user table in user is exixts or not
+            $user = User::where('name', $request->name)->first();
+            if ($user !== null && md5($user->name) == md5($request->name)) { //check user table in user exixts or not
+                $room->users()->attach($user->id, ['created_at' => now(), 'updated_at' => now()]);
+                return redirect()->back();
+            } else {
+                dd("Not Found");
+            }
+        } else {
+            dd("Exixts");
+        }
     }
     function show(Request $request)
     {

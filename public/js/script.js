@@ -1,7 +1,5 @@
 $(document).ready(function () {
-    // setInterval(() => {
-    //     getMessage(8);
-    // }, 1000);
+  
     // $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
     // its use for toggle option
@@ -38,8 +36,9 @@ $(document).ready(function () {
 
         let room_id = $(this).data("room-id"); //get room id use data attributes
         $(".chat-room-id").val(room_id); // store room id in input for add member
-
-        getMessage(room_id); // room id pass in function and display message
+        // setInterval(() => {
+            getMessage(room_id); // room id pass in function and display message
+        // }, 1000);
 
         $(".background").removeClass("active");
         $(this).addClass("active");
@@ -74,8 +73,10 @@ $(document).ready(function () {
                 `<div class="msg ${
                     element["user_id"] == user_id ? "right-msg" : "left-msg" //check user name equal to session name
                 }"> 
-                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/user/${user_photo}');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
-                ${element["user_id"] == user_id ? "" : element["user_id"]}
+                <div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/user/${
+                    element["photo"]
+                }');"></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text">
+                ${element["user_id"] == user_id ? "" : element["user_name"]}
                 </div> <div class="msg-info-time user-select-text">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text user-select-text"> ${
