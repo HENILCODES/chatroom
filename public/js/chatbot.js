@@ -17,7 +17,7 @@ $("#chatbotSend").click(function () {
     if (chatbotText.trim().length > 0) {
         readonlyInput(true);
         displayMessage("user", chatbotText);
-
+        typing("typing......");
         switch (chatbotType) {
             case "search":
                 $.ajax("https://api.openai.com/v1/chat/completions", {
@@ -87,17 +87,21 @@ $("#chatbotSend").click(function () {
         }
     }
 });
+function typing(text) {
+    $(".ChatBot-Typing").html(text);
+}
 function readonlyInput(value) {
     $("#chatbotText").attr("readonly", value);
 }
 function scrollBottom() {
     document.getElementById("scroll-bottom-bot").scrollIntoView();
+    typing("");
 }
 function displayImages(image) {
     $("#msger-chat-bot").append(
         `<div class="msg left-msg"><div class="msg-img shadow fw-bold" style="padding-top: 13px;padding-left:14px;background-image: url('http://127.0.0.1:8000/storage/profile/room/logo.png');"
         "></div> <div class="msg-bubble"> <div class="msg-info"> <div class="msg-info-name user-select-text"> ChatBot </div> <div class="msg-info-time user-select-text"></div> </div> <div class="msg-text user-select-text"> <img src="${image}" width="82%" ></div> </div> </div>`
-    );
+        );
     scrollBottom();
 }
 function errorMessageDisplay(message) {

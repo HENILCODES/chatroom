@@ -143,7 +143,7 @@ body {
   flex-direction: row;
   height: 72px;
 }
-.main-box .user-friend .friend-block:hover #chat_more_op {
+.main-box .user-friend .friend-block:hover #room-more-option {
   visibility: visible !important;
 }
 .main-box .user-friend .friend-block .imgB {
@@ -179,7 +179,7 @@ body {
   opacity: 0.7;
   justify-content: space-between;
 }
-.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right #chat_more_op {
+.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right #room-more-option {
   visibility: hidden;
 }
 .main-box .user-friend .friend-block .friend-detail .friend-last-chat .right i {

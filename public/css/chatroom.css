@@ -19,7 +19,7 @@
     height: 100%;
     font-family: Helvetica, sans-serif;
 }
-#chat_more_op:hover ul {
+#room-more-option:hover ul {
     margin-top: -10px;
     display: block !important;
 }

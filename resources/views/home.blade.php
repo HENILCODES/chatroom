@@ -39,7 +39,7 @@
                         <ul class="list-group position-fixed shadow mt-5" id="option-user"
                             style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
                             <button type="button" class="btn btn-light text-start" data-bs-toggle="modal"
-                            data-bs-target="#CreateRoom">Create Group </button>
+                                data-bs-target="#CreateRoom">Create Group </button>
                             <div class="nav-link">
                                 {{ Form::open(['route' => 'logout']) }}
                                 {{ Form::token() }}
@@ -51,7 +51,7 @@
                     <div class="center-search-box d-flex">
                         <div class="input-search d-flex w-100">
                             <div class="icon"><i class="bi bi-search"></i></div><input class="input"
-                            placeholder="Search or start new chat" contenteditable="true">
+                                placeholder="Search or start new chat" contenteditable="true">
                         </div>
                         <div class="filter"><i class="bi bi-filter"></i></div>
                     </div>
@@ -70,10 +70,12 @@
                                         </div>
                                     </div>
                                     <div class="friend-last-chat d-flex">
-                                        <div class="left"><i class="bi bi-check2"></i><span
-                                                class="lig-color Prchat">Hello</span></div>
+                                        <div class="left">
+                                            {{-- <i class="bi bi-check2"></i> --}}
+                                            <span class="Prchat ChatBot-Typing fw-bold" style="color: #9d0000;"></span>
+                                        </div>
                                         <div class="right">
-                                            {{-- <i class="bi bi-chevron-down" id="chat_more_op"></i> --}}
+                                            {{-- <i class="bi bi-chevron-down" id="room-more-option"></i> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -101,23 +103,39 @@
                                         </div>
                                         <div class="friend-last-chat d-flex">
                                             <div class="left"><i class="bi bi-check2"></i><span
-                                                class="lig-color Prchat">Hello</span></div>
+                                                    class="lig-color Prchat">Hello</span></div>
                                             <div class="right">
-                                                <i class="bi bi-chevron-down" id="chat_more_op"></i>
+                                                <i class="bi bi-chevron-down" id="room-more-option"></i>
+                                                @if ($room['created_by'] == Auth::user()->id)
+                                                    <ul class="list-group position-fixed shadow" id="room-option"
+                                                        style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
+                                                        <li class="nav-link">
+                                                            <form action="{{ route('delete-room') }}" method="POST">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <input type="hidden" name="room_id"
+                                                                    value="{{ $room['id'] }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-light text-start w-100">delete
+                                                                    Group</button>
+                                                                </form=>
+                                                        </li>
+                                                    </ul>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="w-100">
                 <div class="right-box">
                     @include('room.chat-room')
                     @include('room.bot-room')
-                    <x-default-page name="{{env('APP_NAME')}}"/>
+                    <x-default-page name="{{ env('APP_NAME') }}" />
                 </div>
             </div>
         </div>

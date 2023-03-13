@@ -3,8 +3,12 @@ $(document).ready(function () {
     // $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
     // its use for toggle option
+
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
+    });
+    $("#room-more-option").click(function () {
+        $("#room-option").slideToggle();
     });
     $("#room-default-block").click(function () {
         $("#default-box").hide();

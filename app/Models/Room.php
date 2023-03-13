@@ -14,6 +14,7 @@ class Room extends Model
     public $fillable = [
         'id',
         'name',
+        'created_by',
         'photo',
     ];
     protected $primaryKey ='id';

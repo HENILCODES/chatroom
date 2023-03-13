@@ -173,7 +173,7 @@ body {
             flex-direction: row;
             height: 72px;
 
-            &:hover #chat_more_op {
+            &:hover #room-more-option {
                 visibility: visible !important;
             }
 
@@ -218,7 +218,7 @@ body {
                     justify-content: space-between;
 
                     .right {
-                        #chat_more_op {
+                        #room-more-option {
                             visibility: hidden;
                         }
 
