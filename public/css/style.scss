@@ -162,6 +162,7 @@ body {
                 background-color: #eeeaea;
             }
         }
+
         .active {
             background-color: #eeeaea;
         }
@@ -173,7 +174,7 @@ body {
             flex-direction: row;
             height: 72px;
 
-            &:hover #room-more-option {
+            &:hover .room-more-option {
                 visibility: visible !important;
             }
 
@@ -218,8 +219,19 @@ body {
                     justify-content: space-between;
 
                     .right {
-                        #room-more-option {
+                        .room-more-option {
+                            background-color: #eeeaea;
                             visibility: hidden;
+                            &:hover .room-option{
+                                display: block;
+                            }
+                        }
+
+                        .room-option {
+                            display: none;
+                            width: 200px;
+                            margin-left: -155px;
+                            margin-top: -5px;
                         }
 
                         i {

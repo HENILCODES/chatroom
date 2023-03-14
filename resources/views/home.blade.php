@@ -17,6 +17,7 @@
 <body>
     @include('room.create-room')
     @include('room.add-member')
+    @include('room.upload-file')
     <div id="root" class="containers">
         <div class="main-box">
             <div class="box">
@@ -105,23 +106,22 @@
                                             <div class="left"><i class="bi bi-check2"></i><span
                                                     class="lig-color Prchat">Hello</span></div>
                                             <div class="right">
-                                                <i class="bi bi-chevron-down" id="room-more-option"></i>
-                                                @if ($room['created_by'] == Auth::user()->id)
-                                                    <ul class="list-group position-fixed shadow" id="room-option"
-                                                        style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
-                                                        <li class="nav-link">
-                                                            <form action="{{ route('delete-room') }}" method="POST">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <input type="hidden" name="room_id"
-                                                                    value="{{ $room['id'] }}">
-                                                                <button type="submit"
-                                                                    class="btn btn-light text-start w-100">delete
-                                                                    Group</button>
-                                                                </form=>
-                                                        </li>
-                                                    </ul>
-                                                @endif
+                                                <i class="bi bi-chevron-down room-more-option">
+                                                    @if ($room['created_by'] == Auth::user()->id)
+                                                        <ul class="list-group position-fixed shadow room-option">
+                                                            <li class="nav-link">
+                                                                <form action="{{ route('delete-room') }}"
+                                                                    method="POST">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <input type="hidden" name="room_id"
+                                                                        value="{{ $room['id'] }}">
+                                                                    <button type="submit"class="btn btn-danger text-start w-100">delete Group</button>
+                                                                    </form>
+                                                            </li>
+                                                        </ul>
+                                                    @endif
+                                                </i>
                                             </div>
                                         </div>
                                     </div>

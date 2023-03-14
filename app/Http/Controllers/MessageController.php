@@ -12,7 +12,7 @@ class MessageController extends Controller
     //
     function show(Request $request)
     {
-        $chat = Message::select('messages.*', 'users.photo', 'users.name as user_name')->join('users', 'users.id', '=', 'messages.user_id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
+        $chat = Message::select('messages.*', 'users.photo', 'users.name as user_name','files.name as filePath')->join('users', 'users.id', '=', 'messages.user_id')->leftjoin('files','files.message_id','=','messages.id')->where('messages.room_id', $request->room_id)->orderBy('messages.id', 'asc')->get();
         // $room = Room::find(30);
         // $message = $room->messages->toArray();
         // $user = $room->users->toArray();

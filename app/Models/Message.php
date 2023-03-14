@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Message extends Model
@@ -27,5 +28,9 @@ class Message extends Model
     public function rooms(): BelongsToMany
     {
         return $this->belongsToManyo(Room::class);
+    }
+    public function files(): BelongsTo
+    {
+        return $this->belongsTo(File::class);
     }
 }

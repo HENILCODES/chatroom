@@ -143,7 +143,7 @@ body {
   flex-direction: row;
   height: 72px;
 }
-.main-box .user-friend .friend-block:hover #room-more-option {
+.main-box .user-friend .friend-block:hover .room-more-option {
   visibility: visible !important;
 }
 .main-box .user-friend .friend-block .imgB {
@@ -179,8 +179,18 @@ body {
   opacity: 0.7;
   justify-content: space-between;
 }
-.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right #room-more-option {
+.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right .room-more-option {
+  background-color: #eeeaea;
   visibility: hidden;
+}
+.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right .room-more-option:hover .room-option {
+  display: block;
+}
+.main-box .user-friend .friend-block .friend-detail .friend-last-chat .right .room-option {
+  display: none;
+  width: 200px;
+  margin-left: -155px;
+  margin-top: -5px;
 }
 .main-box .user-friend .friend-block .friend-detail .friend-last-chat .right i {
   font-size: 17px;

@@ -16,16 +16,14 @@
                 style="display:none;width: 200px;margin-left: -185px;margin-top: 10px;">
                 {{-- its use for logout --}}
                 <li class="nav-link">
-                    <button class="btn btn-light w-100 text-start" data-bs-toggle="modal"
-                        data-bs-target="#AddMember">Add Member</button>
+                    <button class="btn btn-light w-100 text-start" data-bs-toggle="modal" data-bs-target="#AddMember">Add Member</button>
                 </li>
                 <li class="nav-link">
                     <form action="{{ route('logout-room') }}" method="POST">
                         @method('delete')
                         @csrf
                         <input type="hidden" name="room_id" class="chat-room-id">
-                        <button type="submit" class="btn btn-light text-start w-100">logout
-                            Group</button>
+                        <button type="submit" class="btn btn-light text-start w-100">logout Group</button>
                     </form>
                 </li>
             </ul>
@@ -38,7 +36,7 @@
         <span id="scroll-bottom-chat"></span>
     </main>
     <div class="msger-inputarea">
-        <button class="msger-option-btn shadow bi bi-link-45deg"></button>
+        <button class="msger-option-btn shadow bi bi-link-45deg" data-bs-target="#UploadFile" data-bs-toggle="modal"></button>
         {{ Form::token() }}
         {{ Form::text('chat', '', ['class' => 'msger-input shadow', 'id' => 'chat', 'spellcheck' => 'true', 'placeholder' => 'type hear.... ', 'autocomplete' => 'off']) }}
         <button class="msger-send-btn shadow" id="send"><i class="bi bi-send-fill fs-6"></i></button>

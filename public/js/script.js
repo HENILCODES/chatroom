@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  
     // $("#right-chat-box").hide(); // its use for hide onload chat box in right sied
 
     // its use for toggle option
@@ -7,9 +6,7 @@ $(document).ready(function () {
     $("#option-icon").click(function () {
         $("#option-chat").slideToggle();
     });
-    $("#room-more-option").click(function () {
-        $("#room-option").slideToggle();
-    });
+
     $("#room-default-block").click(function () {
         $("#default-box").hide();
         $("#right-chat-box").hide();
@@ -41,7 +38,7 @@ $(document).ready(function () {
         let room_id = $(this).data("room-id"); //get room id use data attributes
         $(".chat-room-id").val(room_id); // store room id in input for add member
         // setInterval(() => {
-            getMessage(room_id); // room id pass in function and display message
+        getMessage(room_id); // room id pass in function and display message
         // }, 1000);
 
         $(".background").removeClass("active");
@@ -55,8 +52,8 @@ $(document).ready(function () {
     });
 
     function getMessage(roomid) {
-        $.ajax("http://127.0.0.1:8000/get", {
-            type: "get",
+        $.ajax("http://127.0.0.1:8000/getMessages", {
+            type: "post",
             data: {
                 _token: token,
                 room_id: roomid,
@@ -84,7 +81,7 @@ $(document).ready(function () {
                 </div> <div class="msg-info-time user-select-text">${
                     element["created_at"]
                 }</div> </div> <div class="msg-text user-select-text"> ${
-                    element["chat"]
+                    element["filePath"] ? element["filePath"] : element["chat"]
                 } </div> </div> </div>`
             );
         });
@@ -93,7 +90,7 @@ $(document).ready(function () {
         var chat = $("#chat").val();
         let room_id = $(".chat-room-id").val();
         if (chat.trim().length > 0) {
-            $.ajax("http://127.0.0.1:8000/send", {
+            $.ajax("http://127.0.0.1:8000/sendMessages", {
                 type: "POST",
                 data: {
                     _token: token,
